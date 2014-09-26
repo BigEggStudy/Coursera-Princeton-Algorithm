@@ -68,7 +68,7 @@ public final class Deque<Item> implements Iterable<Item> {
 
     // delete and return the item at the front
     public Item removeFirst() {
-        if (isEmpty()) throw new NoSuchElementException("The deque is emtpy.");
+        if (isEmpty()) throw new NoSuchElementException("The deque is empty.");
 
         Node oldFirst = firstNode;
         Item result = oldFirst.item;
