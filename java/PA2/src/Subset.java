@@ -13,8 +13,11 @@ public class Subset {
             if (size < outputCount) {
                 queue.enqueue(StdIn.readString());
             } else {
-                queue.dequeue();
-                queue.enqueue(StdIn.readString());
+                int randomIndex = StdRandom.uniform(size + 1);
+                if (randomIndex < outputCount) {
+                    queue.dequeue();
+                    queue.enqueue(StdIn.readString());
+                }
             }
             size++;
         }
