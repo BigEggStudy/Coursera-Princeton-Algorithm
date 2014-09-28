@@ -16,6 +16,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         end = 0;
     }
 
+    public RandomizedQueue(int capacity) {
+        items = (Item[]) new Object[capacity];
+        first = 0;
+        end = 0;
+    }
+
     // is the queue empty?
     public boolean isEmpty() {
         return first == end;
