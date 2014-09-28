@@ -99,26 +99,28 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         private RandomizedIterator() {
             randomItems = (Item[]) new Object[size()];
-            int tempEnd = end;
 
-            if (tempEnd <= first) tempEnd = tempEnd + items.length;
+            if (!isEmpty()) {
+                int tempEnd = end;
+                if (tempEnd <= first) tempEnd = tempEnd + items.length;
 
-            int newID = 0;
-            for (int i = first; i < tempEnd; i++) {
-                randomItems[newID++] = items[fixedSize(i)];
+                int newID = 0;
+                for (int i = first; i < tempEnd; i++) {
+                    randomItems[newID++] = items[fixedSize(i)];
+                }
+
+                StdRandom.shuffle(randomItems);
             }
-
-            StdRandom.shuffle(randomItems);
         }
 
         @Override
         public boolean hasNext() {
-            return currentIndex == randomItems.length;
+            return currentIndex != randomItems.length;
         }
 
         @Override
         public Item next() {
-            if (hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) throw new NoSuchElementException();
 
             return randomItems[currentIndex++];
         }
@@ -132,6 +134,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // unit testing
     public static void main(String[] args) {
         RandomizedQueue<Integer> queue = new RandomizedQueue<Integer>();
+        for (int value : queue) {
+            StdOut.print(value);
+        }
+
         queue.enqueue(1);
         queue.enqueue(2);
         queue.enqueue(3);
