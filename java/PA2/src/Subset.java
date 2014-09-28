@@ -8,21 +8,11 @@ public class Subset {
         if (outputCount == 0) return;
 
         RandomizedQueue<String> queue = new RandomizedQueue<String>();
-        int size = 0;
         while (!StdIn.isEmpty()) {
-            if (size < outputCount) {
-                queue.enqueue(StdIn.readString());
-            } else {
-                int randomIndex = StdRandom.uniform(size + 1);
-                if (randomIndex < outputCount) {
-                    queue.dequeue();
-                    queue.enqueue(StdIn.readString());
-                }
-            }
-            size++;
+            queue.enqueue(StdIn.readString());
         }
 
-        int queueSize = queue.size();
+        int queueSize = queue.size() > outputCount ? outputCount : queue.size();
         for (int i = 0; i < queueSize; i++) {
             StdOut.println(queue.dequeue());
         }
