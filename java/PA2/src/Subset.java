@@ -6,12 +6,17 @@ public class Subset {
         String outputCountString = args[0];
         int outputCount = Integer.parseInt(outputCountString);
 
-        RandomizedQueue<String> queue = new RandomizedQueue<String>(outputCount);
+        RandomizedQueue<String> queue = new RandomizedQueue<String>();
         int size = 0;
         while (!StdIn.isEmpty()) {
-            int randomIndex = StdRandom.uniform(size);
-            if (randomIndex < outputCount) {
+            if (size < outputCount) {
                 queue.enqueue(StdIn.readString());
+            }else {
+                int randomIndex = StdRandom.uniform(size);
+                if (randomIndex < outputCount) {
+                    queue.dequeue();
+                    queue.enqueue(StdIn.readString());
+                }
             }
             size++;
         }
