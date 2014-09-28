@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 /**
  * Created by jianming.xiao on 9/23/14.
  */
-public final class Deque<Item> implements Iterable<Item> {
+public class Deque<Item> implements Iterable<Item> {
     private int nodeCount;
     private Node firstNode;
     private Node lastNode;
@@ -18,7 +18,8 @@ public final class Deque<Item> implements Iterable<Item> {
 
     // construct an empty deque
     public Deque() {
-        firstNode = lastNode = null;
+        firstNode = null;
+        lastNode = null;
         nodeCount = 0;
     }
 
@@ -149,7 +150,7 @@ public final class Deque<Item> implements Iterable<Item> {
         assert deque.firstNode.before == null;
         assert deque.firstNode.next == null;
 
-        Integer result = deque.removeFirst();
+        int result = deque.removeFirst();
         assert result == 1;
         assert deque.isEmpty();
         assert deque.size() == 0;

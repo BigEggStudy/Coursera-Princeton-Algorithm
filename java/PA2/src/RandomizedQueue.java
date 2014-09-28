@@ -94,13 +94,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class RandomizedIterator implements Iterator<Item> {
-        Item[] randomItems;
-        int currentIndex = 0;
+        private Item[] randomItems;
+        private int currentIndex = 0;
 
         private RandomizedIterator() {
             randomItems = (Item[]) new Object[size()];
+            int tempEnd = end;
+
+            if (tempEnd <= first) tempEnd = tempEnd + items.length;
+
             int newID = 0;
-            for (int i = first; i < end + items.length; i++) {
+            for (int i = first; i < tempEnd; i++) {
                 randomItems[newID++] = items[fixedSize(i)];
             }
 
@@ -160,5 +164,16 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         queue.dequeue();
         queue.dequeue();
         queue.dequeue();
+
+        queue.enqueue(12);
+        queue.enqueue(13);
+        queue.enqueue(14);
+        queue.enqueue(15);
+        queue.dequeue();
+        queue.dequeue();
+
+        for (int value : queue) {
+            StdOut.print(value);
+        }
     }
 }
