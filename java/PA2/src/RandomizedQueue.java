@@ -56,10 +56,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (size() == 0) {
             items[end] = item;
         } else {
-            int index = fixedSize(StdRandom.uniform(size()) + first);
-            Item randomItem = items[index];
-            items[index] = item;
-            items[end] = randomItem;
+            int index = fixedSize(StdRandom.uniform(size() + 1) + first);
+            if (index == end) {
+                items[end] = item;
+            } else {
+                Item randomItem = items[index];
+                items[index] = item;
+                items[end] = randomItem;
+            }
         }
 
         end++;
@@ -85,7 +89,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item sample() {
         if (isEmpty()) throw new NoSuchElementException("The queue is empty.");
 
-        return items[fixedSize(StdRandom.uniform(size()) + first)];
+        int randomIndex = StdRandom.uniform(size);
+        int index = fixedSize(randomIndex + first);
+        return items[index];
     }
 
     // return an independent iterator over items in random order
