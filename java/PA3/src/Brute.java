@@ -21,9 +21,10 @@ public class Brute {
             int y = in.readInt();
             Point p = new Point(x, y);
             p.draw();
+            points[i] = p;
         }
 
-        Arrays.sort(points, 0, N - 1, new Point(0, 0).SLOPE_ORDER);
+        Arrays.sort(points);
         processing(points, N);
 
         // display to screen all at once
