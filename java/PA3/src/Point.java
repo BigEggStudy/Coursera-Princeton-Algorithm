@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 /**
  * Created by jianming.xiao on 10/4/14.
  */
@@ -5,7 +7,7 @@
 public class Point implements Comparable<Point> {
 
     // compare points by slope
-    //public final Comparator<Point> SLOPE_ORDER;
+    public final Comparator<Point> SLOPE_ORDER = new SlopeOrder();
 
     private final int x;
     private final int y;
@@ -50,6 +52,17 @@ public class Point implements Comparable<Point> {
     // return string representation of this point
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    private class SlopeOrder implements Comparator<Point> {
+        @Override
+        public int compare(Point p1, Point p2) {
+            double slope1 = slopeTo(p1);
+            double slope2 = slopeTo(p2);
+            if (slope1 < slope2) return -1;
+            else if (slope1 > slope2) return 1;
+            else return 0;
+        }
     }
 
     // unit test
