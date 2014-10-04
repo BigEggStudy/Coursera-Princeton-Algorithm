@@ -38,44 +38,43 @@ public class Fast {
         for (int i = 0; i < N; i++) {
             Point p = points[i];
 
-            Point[] aux = new Point[N - i];
-            for (int j = 0; j < N - i; j++) {
-                aux[j] = points[j + i];
-            }
+            Point[] aux = points.clone();
             Arrays.sort(aux, p.SLOPE_ORDER);
 
-            Point[] output = new Point[N - i];
+            Point[] output = new Point[N];
             int outputCount = 0;
-            for (int j = 1; j < N - i; j++) {
-                if (outputCount == 0) {
-                    output[outputCount++] = aux[j];
-                } else if (p.slopeTo(aux[j]) == p.slopeTo(output[outputCount - 1])) {
-                    output[outputCount++] = aux[j];
-                } else {
-                    if (outputCount >= 3) {
-                        outputPoint(p, output, outputCount);
-                    }
-                    output = new Point[N - i];
+            output[outputCount++] = p;
+            for (int j = 1; j < N; j++) {
+                if (outputCount != 1 && p.slopeTo(aux[j]) != p.slopeTo(output[outputCount - 1])) {
+                    tryOutput(p, output, outputCount);
+                    output = new Point[N];
                     outputCount = 0;
-                    output[outputCount++] = aux[j];
+                    output[outputCount++] = p;
                 }
+                output[outputCount++] = aux[j];
             }
-            if (outputCount >= 3) {
-                outputPoint(p, output, outputCount);
+            tryOutput(p, output, outputCount);
+        }
+    }
+
+    private static void tryOutput(Point p, Point[] output, int outputCount) {
+        if (outputCount >= 4) {
+            Arrays.sort(output, 0, outputCount - 1);
+            if (output[0] == p) {
+                outputPoint(output, outputCount);
             }
         }
     }
 
-    private static void outputPoint(Point p, Point[] output, int outputCount) {
-        StdOut.print(p.toString());
+    private static void outputPoint(Point[] output, int outputCount) {
         // print
         for (int i = 0; i < outputCount; i++) {
-            StdOut.print(" -> ");
             StdOut.print(output[i].toString());
+            if (i != outputCount - 1) StdOut.print(" -> ");
         }
         StdOut.println();
 
         // draw
-        p.drawTo(output[outputCount - 1]);
+        output[0].drawTo(output[outputCount - 1]);
     }
 }
