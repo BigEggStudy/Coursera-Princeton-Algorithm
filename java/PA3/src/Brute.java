@@ -24,14 +24,16 @@ public class Brute {
             points[i] = p;
         }
 
+        // display to screen all at once
+        StdDraw.show(0);
+        // reset the pen radius
+        StdDraw.setPenRadius();
+
         Arrays.sort(points);
         processing(points, N);
 
         // display to screen all at once
         StdDraw.show(0);
-
-        // reset the pen radius
-        StdDraw.setPenRadius();
     }
 
     private static void processing(Point[] points, int N) {
