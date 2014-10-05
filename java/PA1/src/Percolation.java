@@ -80,7 +80,7 @@ public class Percolation {
         validation(i, j);
 
         int index = xyTo1D(i, j);
-        return backwashUF.find(index) == virtualTopSiteIndex;
+        return backwashUF.connected(index, virtualTopSiteIndex);
     }
 
     // does the system percolate?
