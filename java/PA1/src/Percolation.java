@@ -7,6 +7,7 @@ public class Percolation {
     private final int N;
     private boolean[] sites;
     private WeightedQuickUnionUF weightedQuickUnionUF;
+    private WeightedQuickUnionUF backwashUF;
 
     // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
@@ -20,6 +21,7 @@ public class Percolation {
             sites[i] = false;
         }
         weightedQuickUnionUF = new WeightedQuickUnionUF(N * N + 2);
+        backwashUF = new WeightedQuickUnionUF(N * N + 1);
     }
 
     // open site (row i, column j) if it is not already
@@ -30,24 +32,37 @@ public class Percolation {
         sites[index] = true;
         if (i > 1) {
             int upIndex = xyTo1D(i - 1, j);
-            if (sites[upIndex]) weightedQuickUnionUF.union(index, upIndex);
+            if (sites[upIndex]) {
+                weightedQuickUnionUF.union(index, upIndex);
+                backwashUF.union(index, upIndex);
+            }
         }
         if (i < N) {
             int downIndex = xyTo1D(i + 1, j);
-            if (sites[downIndex]) weightedQuickUnionUF.union(index, downIndex);
+            if (sites[downIndex]) {
+                weightedQuickUnionUF.union(index, downIndex);
+                backwashUF.union(index, downIndex);
+            }
         }
         if (i == 1) {
             weightedQuickUnionUF.union(virtualTopSiteIndex, index);
+            backwashUF.union(virtualTopSiteIndex, index);
         }
         if (j > 1) {
             int leftIndex = xyTo1D(i, j - 1);
-            if (sites[leftIndex]) weightedQuickUnionUF.union(index, leftIndex);
+            if (sites[leftIndex]) {
+                weightedQuickUnionUF.union(index, leftIndex);
+                backwashUF.union(index, leftIndex);
+            }
         }
         if (j < N) {
             int rightIndex = xyTo1D(i, j + 1);
-            if (sites[rightIndex]) weightedQuickUnionUF.union(index, rightIndex);
+            if (sites[rightIndex]) {
+                weightedQuickUnionUF.union(index, rightIndex);
+                backwashUF.union(index, rightIndex);
+            }
         }
-        if (i == N && weightedQuickUnionUF.connected(index, virtualTopSiteIndex)) {
+        if (i == N) {
             weightedQuickUnionUF.union(virtualBottomSiteIndex, index);
         }
     }
@@ -65,7 +80,7 @@ public class Percolation {
         validation(i, j);
 
         int index = xyTo1D(i, j);
-        return weightedQuickUnionUF.find(index) == virtualTopSiteIndex;
+        return backwashUF.find(index) == virtualTopSiteIndex;
     }
 
     // does the system percolate?
@@ -119,6 +134,14 @@ public class Percolation {
         assert !percolation.isFull(6, 6);
         percolation.open(5, 6);
         assert !percolation.isFull(5, 6);
+
+        percolation = new Percolation(5);
+        percolation.open(5, 2);
+        percolation.open(4, 2);
+        percolation.open(1, 2);
+        percolation.open(3, 2);
+        percolation.open(2, 2);
+        assert percolation.percolates();
 
         percolation = new Percolation(1);
         assert !percolation.isFull(1, 1);
