@@ -62,13 +62,21 @@ public class Percolation {
     public boolean isFull(int i, int j) {
         validation(i, j);
 
-        int index = xyTo1D(i, j);
-        return weightedQuickUnionUF.connected(index, virtualTopSiteIndex);
+        if (N == 1) {
+            return isOpen(1, 1);
+        } else {
+            int index = xyTo1D(i, j);
+            return weightedQuickUnionUF.connected(index, virtualTopSiteIndex);
+        }
     }
 
     // does the system percolate?
     public boolean percolates() {
-        return weightedQuickUnionUF.connected(virtualTopSiteIndex, virtualBottomSiteIndex);
+        if (N == 1) {
+            return isOpen(1, 1);
+        } else {
+            return weightedQuickUnionUF.connected(virtualTopSiteIndex, virtualBottomSiteIndex);
+        }
     }
 
     private void validation(int i, int j) {
@@ -98,6 +106,13 @@ public class Percolation {
 
         percolation.open(4, 2);
         percolation.open(5, 2);
+        assert percolation.percolates();
+
+        percolation = new Percolation(1);
+        assert !percolation.isFull(1, 1);
+        assert !percolation.percolates();
+        percolation.open(1, 1);
+        assert percolation.isFull(1, 1);
         assert percolation.percolates();
     }
 }
