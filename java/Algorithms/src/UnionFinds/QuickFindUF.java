@@ -8,6 +8,7 @@ public class QuickFindUF extends UnionFind {
         super(N);
     }
 
+    @Override
     public void union(int p, int q) {
         int pid = id[p];
         int qid = id[q];
@@ -16,6 +17,7 @@ public class QuickFindUF extends UnionFind {
             if (id[i] == pid) id[i] = qid;
     }
 
+    @Override
     public boolean connected(int p, int q) {
         return id[p] == id[q];
     }
