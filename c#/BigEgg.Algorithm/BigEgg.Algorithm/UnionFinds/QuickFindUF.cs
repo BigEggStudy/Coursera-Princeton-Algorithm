@@ -6,7 +6,7 @@
             : base(N)
         { }
 
-        public void Union(int p, int q)
+        public override void Union(int p, int q)
         {
             int pid = id[p];
             int qid = id[q];
@@ -15,7 +15,7 @@
                 if (id[i] == pid) id[i] = qid;
         }
 
-        public bool Connected(int p, int q)
+        public override bool Connected(int p, int q)
         {
             return id[p] == id[q];
         }

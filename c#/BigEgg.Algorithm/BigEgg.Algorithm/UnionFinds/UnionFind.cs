@@ -17,5 +17,9 @@ namespace BigEgg.Algorithm.UnionFinds
                 id[i] = i;
             }
         }
+
+        public abstract void Union(int p, int q);
+
+        public abstract bool Connected(int p, int q);
     }
 }
