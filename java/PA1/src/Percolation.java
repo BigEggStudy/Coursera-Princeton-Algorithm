@@ -62,8 +62,8 @@ public class Percolation {
     public boolean isFull(int i, int j) {
         validation(i, j);
 
-        if (N == 1) {
-            return isOpen(1, 1);
+        if (i == 1) {
+            return isOpen(i, j);
         } else {
             int index = xyTo1D(i, j);
             return weightedQuickUnionUF.connected(index, virtualTopSiteIndex);
@@ -91,6 +91,8 @@ public class Percolation {
     // test client, optional
     public static void main(String[] args) {
         Percolation percolation = new Percolation(5);
+        assert !percolation.isFull(1, 1);
+
         percolation.open(1, 2);
         percolation.open(3, 2);
         percolation.open(2, 1);
