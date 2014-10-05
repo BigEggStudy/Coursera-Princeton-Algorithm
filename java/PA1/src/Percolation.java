@@ -20,10 +20,6 @@ public class Percolation {
             sites[i] = false;
         }
         weightedQuickUnionUF = new WeightedQuickUnionUF(N * N + 2);
-        for (int i = 1; i <= N; i++) {
-            weightedQuickUnionUF.union(xyTo1D(1, i), virtualTopSiteIndex);
-            weightedQuickUnionUF.union(xyTo1D(N, i), virtualBottomSiteIndex);
-        }
     }
 
     // open site (row i, column j) if it is not already
@@ -40,6 +36,9 @@ public class Percolation {
             int downIndex = xyTo1D(i + 1, j);
             if (sites[downIndex]) weightedQuickUnionUF.union(index, downIndex);
         }
+        if (i == 1) {
+            weightedQuickUnionUF.union(virtualTopSiteIndex, index);
+        }
         if (j > 1) {
             int leftIndex = xyTo1D(i, j - 1);
             if (sites[leftIndex]) weightedQuickUnionUF.union(index, leftIndex);
@@ -47,6 +46,9 @@ public class Percolation {
         if (j < N) {
             int rightIndex = xyTo1D(i, j + 1);
             if (sites[rightIndex]) weightedQuickUnionUF.union(index, rightIndex);
+        }
+        if (i == N && weightedQuickUnionUF.connected(index, virtualTopSiteIndex)) {
+            weightedQuickUnionUF.union(virtualBottomSiteIndex, index);
         }
     }
 
@@ -62,12 +64,8 @@ public class Percolation {
     public boolean isFull(int i, int j) {
         validation(i, j);
 
-        if (i == 1 || i == N) {
-            return isOpen(i, j);
-        } else {
-            int index = xyTo1D(i, j);
-            return weightedQuickUnionUF.connected(index, virtualTopSiteIndex);
-        }
+        int index = xyTo1D(i, j);
+        return weightedQuickUnionUF.find(index) == virtualTopSiteIndex;
     }
 
     // does the system percolate?
@@ -90,7 +88,7 @@ public class Percolation {
 
     // test client, optional
     public static void main(String[] args) {
-        Percolation percolation = new Percolation(5);
+        Percolation percolation = new Percolation(6);
         assert !percolation.isFull(1, 1);
 
         percolation.open(1, 2);
@@ -100,6 +98,8 @@ public class Percolation {
         assert !percolation.isFull(3, 2);
         assert !percolation.percolates();
         assert !percolation.isFull(5, 5);
+        percolation.open(6, 4);
+        assert !percolation.isFull(6, 4);
 
         percolation.open(2, 2);
         assert percolation.isFull(3, 2);
@@ -109,10 +109,16 @@ public class Percolation {
 
         percolation.open(4, 2);
         percolation.open(5, 2);
+        percolation.open(6, 2);
         assert percolation.percolates();
-        assert !percolation.isFull(5, 5);
-        percolation.open(5, 5);
-        assert percolation.isFull(5, 5);
+        assert !percolation.isFull(6, 4);
+        percolation.open(5, 4);
+        assert !percolation.isFull(5, 4);
+        assert !percolation.isFull(6, 6);
+        percolation.open(6, 6);
+        assert !percolation.isFull(6, 6);
+        percolation.open(5, 6);
+        assert !percolation.isFull(5, 6);
 
         percolation = new Percolation(1);
         assert !percolation.isFull(1, 1);
