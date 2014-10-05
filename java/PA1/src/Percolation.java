@@ -66,7 +66,11 @@ public class Percolation {
             return isOpen(i, j);
         } else {
             int index = xyTo1D(i, j);
-            return weightedQuickUnionUF.connected(index, virtualTopSiteIndex);
+            if (percolates()) {
+                return weightedQuickUnionUF.connected(index, virtualBottomSiteIndex);
+            } else {
+                return weightedQuickUnionUF.connected(index, virtualTopSiteIndex);
+            }
         }
     }
 
