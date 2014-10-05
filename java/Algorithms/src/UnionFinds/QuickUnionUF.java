@@ -3,7 +3,7 @@ package UnionFinds;
 /**
  * Created by jianming.xiao on 10/5/14.
  */
-public class QuickUnionUF extends UnionFind{
+public class QuickUnionUF extends UnionFind {
     public QuickUnionUF(int N) {
         super(N);
     }
@@ -20,7 +20,7 @@ public class QuickUnionUF extends UnionFind{
         return root(p) == root(q);
     }
 
-    private int root(int i) {
+    protected int root(int i) {
         while (i != id[i]) i = id[i];
         return i;
     }
