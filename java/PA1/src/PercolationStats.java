@@ -35,7 +35,11 @@ public class PercolationStats {
 
     // sample standard deviation of percolation threshold
     public double stddev() {
-        return StdStats.stddev(openSiteCounts);
+        if (T == 1) {
+            return Double.NaN;
+        } else {
+            return StdStats.stddev(openSiteCounts);
+        }
     }
 
     // returns lower bound of the 95% confidence interval
