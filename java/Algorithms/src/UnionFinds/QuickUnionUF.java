@@ -27,10 +27,11 @@ public class QuickUnionUF extends UnionFind {
         if (p < 0 || p >= id.length) throw new IndexOutOfBoundsException();
         if (q < 0 || q >= id.length) throw new IndexOutOfBoundsException();
 
+        if (connected(p, q)) return;;
+
         int pRoot = find(p);
         int qRoot = find(q);
         id[pRoot] = qRoot;
-
         count--;
     }
 

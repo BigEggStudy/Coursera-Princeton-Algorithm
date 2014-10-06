@@ -27,6 +27,8 @@ public class QuickFindUF extends UnionFind {
         if (p < 0 || p >= id.length) throw new IndexOutOfBoundsException();
         if (q < 0 || q >= id.length) throw new IndexOutOfBoundsException();
 
+        if (connected(p, q)) return;
+
         int pid = id[p];
         int qid = id[q];
 

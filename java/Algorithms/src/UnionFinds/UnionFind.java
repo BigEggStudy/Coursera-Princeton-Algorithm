@@ -20,6 +20,7 @@ public abstract class UnionFind implements IUnionFind {
         for (int i = 0; i < N; i++) {
             id[i] = i;
         }
+        this.count = N;
     }
 
     /**
