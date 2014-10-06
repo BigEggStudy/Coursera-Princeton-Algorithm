@@ -34,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnionFinds\BinarySearch.cs" />
+    <Compile Include="BinarySearch.cs" />
     <Compile Include="UnionFinds\QuickFindUF.cs" />
     <Compile Include="UnionFinds\IUnionFind.cs" />
     <Compile Include="UnionFinds\QuickUnionUF.cs" />
