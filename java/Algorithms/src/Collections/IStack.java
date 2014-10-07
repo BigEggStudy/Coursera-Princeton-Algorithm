@@ -25,7 +25,7 @@ public interface IStack<Item> extends Iterable<Item> {
      * Adds the item to this stack.
      *
      * @param item the item to add
-     * @throws NullPointerException if the <tt>item</tt> is null;
+     * @throws java.lang.NullPointerException if the <tt>item</tt> is null;
      */
     void push(Item item) throws NullPointerException;
 
