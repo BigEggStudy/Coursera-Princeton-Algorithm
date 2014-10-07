@@ -33,6 +33,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\IQueue.cs" />
     <Compile Include="Collections\IStack.cs" />
     <Compile Include="Collections\LinkedStack.cs" />
     <Compile Include="Collections\ResizingArrayStack.cs">
