@@ -49,7 +49,7 @@ public class LinkedQueue<Item> implements IQueue<Item> {
      * @throws NullPointerException if the <tt>item</tt> is null;
      */
     @Override
-    public void enqueue(Item item) throws NullPointerException {
+    public void enqueue(Item item) {
         if (item == null) throw new NullPointerException();
         Node oldLast = last;
         last = new Node();
@@ -112,7 +112,7 @@ public class LinkedQueue<Item> implements IQueue<Item> {
         return new LinkedQueueIterator();
     }
 
-    private class LinkedQueueIterator implements Iterator<Item>{
+    private class LinkedQueueIterator implements Iterator<Item> {
         private Node current;
 
         @Override

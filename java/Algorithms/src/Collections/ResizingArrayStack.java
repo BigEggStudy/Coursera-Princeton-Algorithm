@@ -58,7 +58,7 @@ public class ResizingArrayStack<Item> implements IStack<Item> {
      * @throws NullPointerException if the <tt>item</tt> is null;
      */
     @Override
-    public void push(Item item) throws NullPointerException {
+    public void push(Item item) {
         if (item == null) throw new NullPointerException();
         if (N == a.length) resize(2 * a.length);
         a[N++] = item;
@@ -71,7 +71,7 @@ public class ResizingArrayStack<Item> implements IStack<Item> {
      * @throws java.util.NoSuchElementException if this stack is empty
      */
     @Override
-    public Item pop() throws NoSuchElementException {
+    public Item pop() {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
         Item result = a[N - 1];
         a[N - 1] = null;
@@ -87,7 +87,7 @@ public class ResizingArrayStack<Item> implements IStack<Item> {
      * @throws java.util.NoSuchElementException if this stack is empty
      */
     @Override
-    public Item peek() throws NoSuchElementException {
+    public Item peek() {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
         return a[N - 1];
     }

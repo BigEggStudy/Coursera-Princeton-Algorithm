@@ -26,7 +26,7 @@ public interface IQueue<Item> extends Iterable<Item> {
      * @param item the item to add
      * @throws java.lang.NullPointerException if the <tt>item</tt> is null;
      */
-    void enqueue(Item item) throws NullPointerException;
+    void enqueue(Item item);
 
     /**
      * Removes and returns the item on this queue that was least recently added.

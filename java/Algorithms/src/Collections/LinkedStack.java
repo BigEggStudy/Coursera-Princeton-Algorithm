@@ -50,7 +50,7 @@ public class LinkedStack<Item> implements IStack<Item> {
      * @throws NullPointerException if the <tt>item</tt> is null;
      */
     @Override
-    public void push(Item item) throws NullPointerException {
+    public void push(Item item) {
         if (item == null) throw new NullPointerException();
         Node oldFirst = first;
         first = new Node();
@@ -66,7 +66,7 @@ public class LinkedStack<Item> implements IStack<Item> {
      * @throws java.util.NoSuchElementException if this stack is empty
      */
     @Override
-    public Item pop() throws NoSuchElementException {
+    public Item pop() {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
         Item result = first.item;
         first = first.next;
@@ -81,7 +81,7 @@ public class LinkedStack<Item> implements IStack<Item> {
      * @throws java.util.NoSuchElementException if this stack is empty
      */
     @Override
-    public Item peek() throws NoSuchElementException {
+    public Item peek() {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
         return first.item;
     }
