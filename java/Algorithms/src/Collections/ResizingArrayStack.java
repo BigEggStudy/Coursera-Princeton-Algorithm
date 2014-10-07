@@ -6,20 +6,15 @@ import java.util.NoSuchElementException;
 /**
  * Created by jianming.xiao on 10/7/14.
  */
-public class LinkedStack<Item> implements IStack<Item> {
+public class ResizingArrayStack<Item> implements IStack<Item> {
+    private Item[] a;
     private int N;
-    private Node first;
-
-    private class Node {
-        private Item item;
-        private Node next;
-    }
 
     /**
      * Initializes an empty stack.
      */
-    public LinkedStack() {
-        first = null;
+    public ResizingArrayStack() {
+        a = (Item[]) new Object[2];
         N = 0;
     }
 
@@ -30,7 +25,7 @@ public class LinkedStack<Item> implements IStack<Item> {
      */
     @Override
     public boolean isEmpty() {
-        return first == null;
+        return N == 0;
     }
 
     /**
@@ -43,6 +38,14 @@ public class LinkedStack<Item> implements IStack<Item> {
         return N;
     }
 
+    private void resize(int capacity) {
+        Item[] temp = (Item[]) new Object[capacity];
+        for (int i = 0; i < N; i++) {
+            temp[i] = a[i];
+        }
+        a = temp;
+    }
+
     /**
      * Adds the item to this stack.
      *
@@ -52,11 +55,8 @@ public class LinkedStack<Item> implements IStack<Item> {
     @Override
     public void push(Item item) throws NullPointerException {
         if (item == null) throw new NullPointerException();
-        Node oldFirst = first;
-        first = new Node();
-        first.item = item;
-        first.next = oldFirst;
-        N++;
+        if (N == a.length) resize(2 * a.length);
+        a[N++] = item;
     }
 
     /**
@@ -68,9 +68,10 @@ public class LinkedStack<Item> implements IStack<Item> {
     @Override
     public Item pop() throws NoSuchElementException {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
-        Item result = first.item;
-        first = first.next;
+        Item result = a[N - 1];
+        a[N - 1] = null;
         N--;
+        if (N == a.length / 4) resize(a.length / 2);
         return result;
     }
 
@@ -83,7 +84,7 @@ public class LinkedStack<Item> implements IStack<Item> {
     @Override
     public Item peek() throws NoSuchElementException {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
-        return first.item;
+        return a[N - 1];
     }
 
     /**
@@ -107,23 +108,21 @@ public class LinkedStack<Item> implements IStack<Item> {
      */
     @Override
     public Iterator<Item> iterator() {
-        return new LinkedStackIterator();
+        return new ReverseArrayIterator();
     }
 
-    private class LinkedStackIterator implements Iterator<Item> {
-        private Node current = first;
+    private class ReverseArrayIterator implements Iterator<Item> {
+        private int i = N;
 
         @Override
         public boolean hasNext() {
-            return current != null;
+            return i > 0;
         }
 
         @Override
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            Item result = current.item;
-            current = current.next;
-            return result;
+            return a[--i];
         }
 
         @Override
