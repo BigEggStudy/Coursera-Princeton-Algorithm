@@ -38,6 +38,11 @@ public class ResizingArrayStack<Item> implements IStack<Item> {
         return N;
     }
 
+    /**
+     * Resize the underlying array holding the elements
+     *
+     * @param capacity the new capacity of the stack
+     */
     private void resize(int capacity) {
         Item[] temp = (Item[]) new Object[capacity];
         for (int i = 0; i < N; i++) {
