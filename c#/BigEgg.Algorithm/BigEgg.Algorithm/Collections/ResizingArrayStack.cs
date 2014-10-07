@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BigEgg.Algorithm.Collections
 {
@@ -95,12 +94,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns>The sequence of items in the stack in LIFO order, separated by spaces.</returns>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (var item in this)
-            {
-                sb.Append(item.ToString()).Append(" ");
-            }
-            return sb.ToString();
+            return String.Join(" ", this);
         }
 
         /// <summary>
