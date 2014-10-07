@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BigEgg.Algorithm
+namespace BigEgg.Algorithm.Collections
 {
     public interface IStack<Item> : IEnumerable<Item>
     {

@@ -33,8 +33,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IStack.cs" />
-    <Compile Include="LinkedStack.cs" />
+    <Compile Include="Collections\IStack.cs" />
+    <Compile Include="Collections\LinkedStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BinarySearch.cs" />
     <Compile Include="UnionFinds\QuickFindUF.cs" />

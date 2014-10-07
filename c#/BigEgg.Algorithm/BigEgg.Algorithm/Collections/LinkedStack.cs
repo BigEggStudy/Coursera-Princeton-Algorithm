@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BigEgg.Algorithm
+namespace BigEgg.Algorithm.Collections
 {
     public class LinkedStack<Item> : IStack<Item>
     {
