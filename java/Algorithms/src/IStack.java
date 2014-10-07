@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by jianming.xiao on 10/7/14.
@@ -24,7 +25,7 @@ public interface IStack<Item> extends Iterable<Item> {
      * @param item the item to add
      * @throws NullPointerException if the <tt>item</tt> is null;
      */
-    void push(Item item);
+    void push(Item item) throws NullPointerException;
 
     /**
      * Removes and returns the item most recently added to this stack.
@@ -32,7 +33,7 @@ public interface IStack<Item> extends Iterable<Item> {
      * @return the item most recently added
      * @throws java.util.NoSuchElementException if this stack is empty
      */
-    Item pop();
+    Item pop() throws NoSuchElementException;
 
     /**
      * Returns (but does not remove) the item most recently added to this stack.
@@ -40,7 +41,7 @@ public interface IStack<Item> extends Iterable<Item> {
      * @return the item most recently added to this stack
      * @throws java.util.NoSuchElementException if this stack is empty
      */
-    Item peek();
+    Item peek() throws NoSuchElementException;
 
     /**
      * Returns a string representation of this stack.

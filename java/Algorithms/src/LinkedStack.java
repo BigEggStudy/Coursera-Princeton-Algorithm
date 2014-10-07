@@ -1,5 +1,3 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -50,7 +48,7 @@ public class LinkedStack<Item> implements IStack<Item> {
      * @throws NullPointerException if the <tt>item</tt> is null;
      */
     @Override
-    public void push(Item item) {
+    public void push(Item item) throws NullPointerException {
         if (item == null) throw new NullPointerException();
         Node oldFirst = first;
         first = new Node();
@@ -66,7 +64,7 @@ public class LinkedStack<Item> implements IStack<Item> {
      * @throws java.util.NoSuchElementException if this stack is empty
      */
     @Override
-    public Item pop() {
+    public Item pop() throws  NoSuchElementException {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
         Item result = first.item;
         first = first.next;
@@ -81,7 +79,7 @@ public class LinkedStack<Item> implements IStack<Item> {
      * @throws java.util.NoSuchElementException if this stack is empty
      */
     @Override
-    public Item peek() {
+    public Item peek() throws NoSuchElementException {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
         return first.item;
     }
