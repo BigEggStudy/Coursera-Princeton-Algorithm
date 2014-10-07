@@ -4,25 +4,19 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Created by jianming.xiao on 10/7/14.
+ * Created by jianming.xiao on 10/8/14.
  */
-public class LinkedQueue<Item> implements IQueue<Item> {
-    private int N;
-    private Node first;
-    private Node last;
-
-    private class Node {
-        private Item item;
-        private Node next;
-    }
+public class ResizingArrayQueue<Item> implements IQueue<Item> {
+    private Item[] q;
+    private int N = 0;
+    private int first = 0;
+    private int last = 0;
 
     /**
      * Initializes an empty queue.
      */
-    public LinkedQueue() {
-        N = 0;
-        first = null;
-        last = null;
+    public ResizingArrayQueue() {
+        this.q = (Item[]) new Object[2];
     }
 
     /**
@@ -32,7 +26,7 @@ public class LinkedQueue<Item> implements IQueue<Item> {
      */
     @Override
     public boolean isEmpty() {
-        return first == null;
+        return N == 0;
     }
 
     /**
@@ -45,6 +39,16 @@ public class LinkedQueue<Item> implements IQueue<Item> {
         return N;
     }
 
+    private void resize(int capacity) {
+        Item[] temp = (Item[]) new Object[capacity];
+        for (int i = 0; i < N; i++) {
+            temp[i] = q[(first + i) % q.length];
+        }
+        q = temp;
+        first = 0;
+        last = N;
+    }
+
     /**
      * Adds the item to this queue.
      *
@@ -54,12 +58,9 @@ public class LinkedQueue<Item> implements IQueue<Item> {
     @Override
     public void enqueue(Item item) {
         if (item == null) throw new NullPointerException();
-        Node oldLast = last;
-        last = new Node();
-        last.item = item;
-        last.next = null;
-        if (isEmpty()) first = last;
-        else oldLast.next = last;
+        if (N == q.length) resize(q.length * 2);
+        q[last++] = item;
+        if (last == q.length) last = 0;
         N++;
     }
 
@@ -72,10 +73,12 @@ public class LinkedQueue<Item> implements IQueue<Item> {
     @Override
     public Item dequeue() {
         if (isEmpty()) throw new NoSuchElementException();
-        Item result = first.item;
-        first = first.next;
-        if (isEmpty()) last = null;
+        Item result = q[first];
+        q[first] = null;
         N--;
+        first++;
+        if (first == q.length) first = 0;
+        if (N == q.length / 4) resize(q.length / 2);
         return result;
     }
 
@@ -88,7 +91,7 @@ public class LinkedQueue<Item> implements IQueue<Item> {
     @Override
     public Item peek() {
         if (isEmpty()) throw new NoSuchElementException();
-        return first.item;
+        return q[first];
     }
 
     /**
@@ -112,23 +115,21 @@ public class LinkedQueue<Item> implements IQueue<Item> {
      */
     @Override
     public Iterator<Item> iterator() {
-        return new LinkedQueueIterator();
+        return new ResizingArrayQueueIterator();
     }
 
-    private class LinkedQueueIterator implements Iterator<Item> {
-        private Node current;
+    private class ResizingArrayQueueIterator implements Iterator<Item> {
+        private int i = 0;
 
         @Override
         public boolean hasNext() {
-            return current != null;
+            return i < N;
         }
 
         @Override
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            Item result = current.item;
-            current = current.next;
-            return result;
+            return q[(first + i) % q.length];
         }
 
         @Override
