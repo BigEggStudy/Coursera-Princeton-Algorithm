@@ -4,26 +4,22 @@ using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Collections
 {
-    public class LinkedQueue<Item> : IQueue<Item>
+    public class ResizingArrayQueue<Item> : IQueue<Item>
     {
         private int N;
-        private Node first;
-        private Node last;
-
-        private class Node
-        {
-            public Item Item { get; set; }
-            public Node Next { get; set; }
-        }
+        private int first;
+        private int last;
+        private Item[] q;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinkedQueue{Item}"/> class.
+        /// Initializes a new instance of the <see cref="ResizingArrayQueue{Item}"/> class.
         /// </summary>
-        public LinkedQueue()
+        public ResizingArrayQueue()
         {
+            q = new Item[2];
             N = 0;
-            first = null;
-            last = null;
+            first = 0;
+            last = 0;
         }
 
         /// <summary>
@@ -32,7 +28,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns><c>True</c> if this queue is empty; <c>false</c> otherwise</returns>
         public bool IsEmpty()
         {
-            return first == null;
+            return N == 0;
         }
 
         /// <summary>
@@ -45,6 +41,22 @@ namespace BigEgg.Algorithm.Collections
         }
 
         /// <summary>
+        /// Resize the underlying array holding the elements.
+        /// </summary>
+        /// <param name="capacity">The new capacity of the queue.</param>
+        private void Resize(int capacity)
+        {
+            Item[] temp = new Item[capacity];
+            for (int i = 0; i < N; i++)
+            {
+                temp[i] = q[(first + i) % q.Length];
+            }
+            q = temp;
+            first = 0;
+            last = N;
+        }
+
+        /// <summary>
         /// Adds the item to this queue.
         /// </summary>
         /// <param name="item">The item to add.</param>
@@ -52,12 +64,9 @@ namespace BigEgg.Algorithm.Collections
         public void Enqueue(Item item)
         {
             if (item == null) { throw new ArgumentNullException(); }
-            Node oldLast = last;
-            last = new Node();
-            last.Item = item;
-            last.Next = null;
-            if (IsEmpty()) first = last;
-            else oldLast.Next = last;
+            if (N == q.Length) Resize(q.Length * 2);
+            q[last++] = item;
+            if (last == q.Length) last = 0;
             N++;
         }
 
@@ -69,10 +78,12 @@ namespace BigEgg.Algorithm.Collections
         public Item Dequeue()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
-            Item result = first.Item;
-            first = first.Next;
-            if (IsEmpty()) last = null;
+            Item result = q[first];
+            q[first] = default(Item);
             N--;
+            first++;
+            if (first == q.Length) first = 0;
+            if (N == q.Length / 4) Resize(q.Length / 2);
             return result;
         }
 
@@ -84,7 +95,7 @@ namespace BigEgg.Algorithm.Collections
         public Item Peek()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
-            return first.Item;
+            return q[first];
         }
 
         /// <summary>
@@ -120,40 +131,42 @@ namespace BigEgg.Algorithm.Collections
 
         private class Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
         {
-            private Node current;
-            private Node first;
+            private int i = 0;
+            private int N;
+            private int first;
+            private Item[] q;
 
-            public Enumerator(LinkedQueue<Item> queue)
+            public Enumerator(ResizingArrayQueue<Item> queue)
             {
-                current = queue.first;
                 first = queue.first;
+                q = queue.q;
+                N = queue.N;
             }
 
             public Item Current
             {
-                get { return current.Item; }
+                get { return q[(first + i) % q.Length]; }
             }
 
             public void Dispose()
             {
-                current = null;
-                first = null;
+                i = N = first = 0;
+                q = null;
             }
 
             object IEnumerator.Current
             {
-                get { return current.Item; }
+                get { return q[(first + i) % q.Length]; }
             }
 
             public bool MoveNext()
             {
-                current = current.Next;
-                return current != null;
+                return ++i < N;
             }
 
             public void Reset()
             {
-                current = first;
+                i = 0;
             }
         }
     }

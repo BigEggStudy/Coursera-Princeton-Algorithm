@@ -37,6 +37,7 @@
     <Compile Include="Collections\IStack.cs" />
     <Compile Include="Collections\LinkedQueue.cs" />
     <Compile Include="Collections\LinkedStack.cs" />
+    <Compile Include="Collections\ResizingArrayQueue.cs" />
     <Compile Include="Collections\ResizingArrayStack.cs">
       <SubType>Code</SubType>
     </Compile>
