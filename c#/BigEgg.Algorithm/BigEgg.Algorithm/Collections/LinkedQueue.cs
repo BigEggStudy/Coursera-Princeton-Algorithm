@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Collections
 {
-    public class LinkedStack<Item> : IStack<Item>
+    public class LinkedQueue<Item> : IQueue<Item>
     {
         private int N;
         private Node first;
+        private Node last;
 
         private class Node
         {
@@ -15,67 +16,62 @@ namespace BigEgg.Algorithm.Collections
             public Node Next { get; set; }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LinkedStack{Item}"/> class.
-        /// </summary>
-        public LinkedStack()
-        {
-            N = 0;
-            first = null;
-        }
 
         /// <summary>
-        /// Is this stack empty?
+        /// Is this queue empty?
         /// </summary>
-        /// <returns><c>True</c> if this stack is empty; <c>false</c> otherwise</returns>
+        /// <returns><c>True</c> if this queue is empty; <c>false</c> otherwise</returns>
         public bool IsEmpty()
         {
             return first == null;
         }
 
         /// <summary>
-        /// Returns the number of items in the stack.
+        /// Returns the number of items in this queue.
         /// </summary>
-        /// <returns>The number of items in the stack.</returns>
+        /// <returns>The number of items in this queue.</returns>
         public int Size()
         {
             return N;
         }
 
         /// <summary>
-        /// Adds the item to this stack.
+        /// Adds the item to this queue.
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        public void Push(Item item)
+        public void Enqueue(Item item)
         {
-            if (item == null) { throw new ArgumentNullException("item"); }
-            var oldFirst = first;
-            first = new Node();
-            first.Item = item;
-            first.Next = oldFirst;
+            if (item == null) { throw new ArgumentNullException(); }
+            Node oldLast = last;
+            last = new Node();
+            last.Item = item;
+            last.Next = null;
+            if (IsEmpty()) first = last;
+            else oldLast.Next = last;
             N++;
         }
 
         /// <summary>
-        /// Removes and returns the item most recently added to this stack.
+        /// Removes and returns the item on this queue that was least recently added.
         /// </summary>
-        /// <returns>The item most recently added.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
-        public Item Pop()
+        /// <returns>The item on this queue that was least recently added.</returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">Queue is empty.</exception>
+        public Item Dequeue()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
-            var result = first.Item;
+            Item result = first.Item;
             first = first.Next;
+            if (IsEmpty()) last = null;
             N--;
             return result;
         }
 
         /// <summary>
-        /// Returns (but does not remove) the item most recently added to this stack.
+        /// Returns (but does not remove) the item least recently added to this queue.
         /// </summary>
-        /// <returns>The item most recently added to this stack.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
+        /// <returns>The item least recently added to this queue.</returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">Queue is empty.</exception>
         public Item Peek()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
@@ -83,19 +79,19 @@ namespace BigEgg.Algorithm.Collections
         }
 
         /// <summary>
-        /// Returns a string representation of this stack.
+        /// Returns a string representation of this queue.
         /// </summary>
-        /// <returns>The sequence of items in the stack in LIFO order, separated by spaces.</returns>
+        /// <returns>The sequence of items in the queue in FIFO order, separated by spaces.</returns>
         public override string ToString()
         {
-            return String.Join(" ", this);
+            return String.Join("", this);
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the items in LIFO order.
+        /// Returns an enumerator that iterates through the items in this queue in FIFO order.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the items in LIFO order.
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the items in this queue in FIFO order.
         /// </returns>
         public IEnumerator<Item> GetEnumerator()
         {
@@ -103,27 +99,26 @@ namespace BigEgg.Algorithm.Collections
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the items in LIFO order.
+        /// Returns an enumerator that iterates through the items in this queue in FIFO order.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the items in LIFO order.
+        /// An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the items in this queue in FIFO order.
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new Enumerator(this);
         }
 
-        private struct Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
+        private class Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
         {
             private Node current;
             private Node first;
 
-            public Enumerator(LinkedStack<Item> stack)
+            public Enumerator(LinkedQueue<Item> queue)
             {
-                current = stack.first;
-                first = stack.first;
+                current = queue.first;
+                first = queue.first;
             }
-
 
             public Item Current
             {
@@ -132,10 +127,11 @@ namespace BigEgg.Algorithm.Collections
 
             public void Dispose()
             {
-                first = current = null;
+                current = null;
+                first = null;
             }
 
-            object System.Collections.IEnumerator.Current
+            object IEnumerator.Current
             {
                 get { return current.Item; }
             }

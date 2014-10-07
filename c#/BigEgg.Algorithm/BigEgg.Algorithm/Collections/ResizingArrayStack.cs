@@ -103,7 +103,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the items in LIFO order.
         /// </returns>
-        IEnumerator<Item> IEnumerable<Item>.GetEnumerator()
+        public IEnumerator<Item> GetEnumerator()
         {
             return new Enumerator(this);
         }
