@@ -116,7 +116,7 @@ public class LinkedQueue<Item> implements IQueue<Item> {
     }
 
     private class LinkedQueueIterator implements Iterator<Item> {
-        private Node current;
+        private Node current = first;
 
         @Override
         public boolean hasNext() {
