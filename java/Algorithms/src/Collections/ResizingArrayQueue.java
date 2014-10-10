@@ -7,16 +7,18 @@ import java.util.NoSuchElementException;
  * Created by jianming.xiao on 10/8/14.
  */
 public class ResizingArrayQueue<Item> implements IQueue<Item> {
-    private Item[] q;
-    private int N = 0;
-    private int first = 0;
-    private int last = 0;
+    private Item[] q;            // queue elements
+    private int N = 0;           // number of elements on queue
+    private int first = 0;       // index of first element of queue
+    private int last = 0;       // index of next available slot
+
 
     /**
      * Initializes an empty queue.
      */
     public ResizingArrayQueue() {
-        this.q = (Item[]) new Object[2];
+        // cast needed since no generic array creation in Java
+        q = (Item[]) new Object[2];
     }
 
     /**
@@ -24,7 +26,6 @@ public class ResizingArrayQueue<Item> implements IQueue<Item> {
      *
      * @return true if this queue is empty; false otherwise
      */
-    @Override
     public boolean isEmpty() {
         return N == 0;
     }
@@ -34,13 +35,12 @@ public class ResizingArrayQueue<Item> implements IQueue<Item> {
      *
      * @return the number of items in this queue
      */
-    @Override
     public int size() {
         return N;
     }
 
-    private void resize(int capacity) {
-        Item[] temp = (Item[]) new Object[capacity];
+    private void resize(int max) {
+        Item[] temp = (Item[]) new Object[max];
         for (int i = 0; i < N; i++) {
             temp[i] = q[(first + i) % q.length];
         }
@@ -58,7 +58,7 @@ public class ResizingArrayQueue<Item> implements IQueue<Item> {
     @Override
     public void enqueue(Item item) {
         if (item == null) throw new NullPointerException();
-        if (N == q.length) resize(q.length * 2);
+        if (N == q.length) resize(2 * q.length);
         q[last++] = item;
         if (last == q.length) last = 0;
         N++;
@@ -129,7 +129,7 @@ public class ResizingArrayQueue<Item> implements IQueue<Item> {
         @Override
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            return q[(first + i) % q.length];
+            return q[(first + i++) % q.length];
         }
 
         @Override
