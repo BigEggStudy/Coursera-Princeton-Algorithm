@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BigEgg.Algorithm.Test.Collections
 {
     [TestClass]
-    public class ResizingArrayStack
+    public class ResizingArrayStackTest
     {
         [TestMethod]
         public void ConstructorTest()
