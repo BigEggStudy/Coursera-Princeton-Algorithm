@@ -131,7 +131,7 @@ namespace BigEgg.Algorithm.Collections
 
         private class Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
         {
-            private int i = 0;
+            private int i = -1;
             private int N;
             private int first;
             private Item[] q;
