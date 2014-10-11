@@ -10,37 +10,37 @@ namespace BigEgg.Algorithm.Test.Collections
         [TestMethod]
         public void ConstructorTest()
         {
-            IQueue<int> stack = new ResizingArrayQueue<int>();
-            Assert.IsTrue(stack.IsEmpty());
-            Assert.AreEqual(0, stack.Size());
-            Assert.IsTrue(string.IsNullOrWhiteSpace(stack.ToString()));
+            IQueue<int> queue = new ResizingArrayQueue<int>();
+            Assert.IsTrue(queue.IsEmpty());
+            Assert.AreEqual(0, queue.Size());
+            Assert.IsTrue(string.IsNullOrWhiteSpace(queue.ToString()));
         }
 
         [TestMethod]
         public void EnqueueAndDequeueTest_ValueType()
         {
-            IQueue<int> stack = new ResizingArrayQueue<int>();
-            stack.Enqueue(1);
-            Assert.IsFalse(stack.IsEmpty());
-            Assert.AreEqual(1, stack.Peek());
-            Assert.AreEqual(1, stack.Size());
-            int value = stack.Dequeue();
-            Assert.IsTrue(stack.IsEmpty());
-            Assert.AreEqual(0, stack.Size());
+            IQueue<int> queue = new ResizingArrayQueue<int>();
+            queue.Enqueue(1);
+            Assert.IsFalse(queue.IsEmpty());
+            Assert.AreEqual(1, queue.Peek());
+            Assert.AreEqual(1, queue.Size());
+            int value = queue.Dequeue();
+            Assert.IsTrue(queue.IsEmpty());
+            Assert.AreEqual(0, queue.Size());
             Assert.AreEqual(1, value);
         }
 
         [TestMethod]
         public void EnqueueAndDequeueTest_ReferenceType()
         {
-            IQueue<String> stack = new ResizingArrayQueue<String>();
-            stack.Enqueue("1");
-            Assert.IsFalse(stack.IsEmpty());
-            Assert.AreEqual("1", stack.Peek());
-            Assert.AreEqual(1, stack.Size());
-            String value = stack.Dequeue();
-            Assert.IsTrue(stack.IsEmpty());
-            Assert.AreEqual(0, stack.Size());
+            IQueue<String> queue = new ResizingArrayQueue<String>();
+            queue.Enqueue("1");
+            Assert.IsFalse(queue.IsEmpty());
+            Assert.AreEqual("1", queue.Peek());
+            Assert.AreEqual(1, queue.Size());
+            String value = queue.Dequeue();
+            Assert.IsTrue(queue.IsEmpty());
+            Assert.AreEqual(0, queue.Size());
             Assert.AreEqual("1", value);
         }
 
@@ -48,64 +48,64 @@ namespace BigEgg.Algorithm.Test.Collections
         [ExpectedException(typeof(ArgumentNullException))]
         public void EnqueueTest_NullItem()
         {
-            IQueue<String> stack = new ResizingArrayQueue<String>();
-            stack.Enqueue(null);
+            IQueue<String> queue = new ResizingArrayQueue<String>();
+            queue.Enqueue(null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void DequeueTest_EmptyStack()
+        public void DequeueTest_Emptyqueue()
         {
-            IQueue<int> stack = new ResizingArrayQueue<int>();
-            stack.Dequeue();
+            IQueue<int> queue = new ResizingArrayQueue<int>();
+            queue.Dequeue();
         }
 
         [TestMethod]
         public void ManyEnqueueTest()
         {
-            IQueue<int> stack = new ResizingArrayQueue<int>();
+            IQueue<int> queue = new ResizingArrayQueue<int>();
             for (int i = 0; i < 10; i++)
             {
-                stack.Enqueue(i);
-                Assert.IsFalse(stack.IsEmpty());
-                Assert.AreEqual(i + 1, stack.Size());
-                Assert.AreEqual(0, stack.Peek());
+                queue.Enqueue(i);
+                Assert.IsFalse(queue.IsEmpty());
+                Assert.AreEqual(i + 1, queue.Size());
+                Assert.AreEqual(0, queue.Peek());
             }
         }
 
         [TestMethod]
         public void ManyDequeueTest()
         {
-            IQueue<int> stack = new ResizingArrayQueue<int>();
+            IQueue<int> queue = new ResizingArrayQueue<int>();
             for (int i = 0; i < 10; i++)
             {
-                stack.Enqueue(i);
+                queue.Enqueue(i);
             }
             for (int i = 0; i < 10; i++)
             {
-                int value = stack.Dequeue();
-                Assert.AreEqual(10 - i - 1, stack.Size());
+                int value = queue.Dequeue();
+                Assert.AreEqual(10 - i - 1, queue.Size());
                 Assert.AreEqual(i, value);
             }
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void PeekTest_EmptyStack()
+        public void PeekTest_Emptyqueue()
         {
-            IQueue<int> stack = new ResizingArrayQueue<int>();
-            stack.Peek();
+            IQueue<int> queue = new ResizingArrayQueue<int>();
+            queue.Peek();
         }
 
         [TestMethod]
         public void ToStringTest()
         {
-            IQueue<int> stack = new ResizingArrayQueue<int>();
+            IQueue<int> queue = new ResizingArrayQueue<int>();
             for (int i = 0; i < 10; i++)
             {
-                stack.Enqueue(i);
+                queue.Enqueue(i);
             }
-            Assert.AreEqual("0 1 2 3 4 5 6 7 8 9", stack.ToString());
+            Assert.AreEqual("0 1 2 3 4 5 6 7 8 9", queue.ToString());
         }
     }
 }
