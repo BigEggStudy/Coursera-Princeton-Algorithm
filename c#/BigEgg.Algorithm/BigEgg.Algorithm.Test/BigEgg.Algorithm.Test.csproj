@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BinarySearchTest.cs" />
+    <Compile Include="Collections\LinkedBagTest.cs" />
     <Compile Include="Collections\LinkedQueueTest.cs" />
     <Compile Include="Collections\LinkedStackTest.cs" />
     <Compile Include="Collections\ResizingArrayQueueTest.cs" />

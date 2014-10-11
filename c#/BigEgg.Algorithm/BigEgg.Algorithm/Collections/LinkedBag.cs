@@ -56,6 +56,7 @@ namespace BigEgg.Algorithm.Collections
                 Item = item,
                 Next = oldFirst
             };
+            N++;
         }
 
         /// <summary>
@@ -69,12 +70,12 @@ namespace BigEgg.Algorithm.Collections
 
         public IEnumerator<Item> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new Enumerator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new Enumerator(this);
         }
 
         private class Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
