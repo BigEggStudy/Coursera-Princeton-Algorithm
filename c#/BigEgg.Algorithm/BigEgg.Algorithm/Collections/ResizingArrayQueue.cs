@@ -166,7 +166,7 @@ namespace BigEgg.Algorithm.Collections
 
             public void Reset()
             {
-                i = 0;
+                i = -1;
             }
         }
     }
