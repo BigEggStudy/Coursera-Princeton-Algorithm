@@ -39,8 +39,13 @@ public class ResizingArrayQueue<Item> implements IQueue<Item> {
         return N;
     }
 
-    private void resize(int max) {
-        Item[] temp = (Item[]) new Object[max];
+    /**
+     * Resize the underlying array holding the elements
+     *
+     * @param capacity the new capacity of the queue
+     */
+    private void resize(int capacity) {
+        Item[] temp = (Item[]) new Object[capacity];
         for (int i = 0; i < N; i++) {
             temp[i] = q[(first + i) % q.length];
         }

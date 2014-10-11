@@ -4,20 +4,15 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Created by jianming.xiao on 10/11/14.
+ * Created by jianming.xiao on 10/12/14.
  */
-public class LinkedBag<Item> implements IBag<Item> {
+public class ResizingArrayBag<Item> implements IBag<Item> {
+    private Item[] a;
     private int N;
-    private Node first;
 
-    private class Node {
-        private Item item;
-        private Node next;
-    }
-
-    public LinkedBag() {
+    public ResizingArrayBag() {
+        a = (Item[]) new Object[2];
         N = 0;
-        first = null;
     }
 
     /**
@@ -27,7 +22,7 @@ public class LinkedBag<Item> implements IBag<Item> {
      */
     @Override
     public boolean isEmpty() {
-        return first == null;
+        return N == 0;
     }
 
     /**
@@ -41,6 +36,19 @@ public class LinkedBag<Item> implements IBag<Item> {
     }
 
     /**
+     * Resize the underlying array holding the elements
+     *
+     * @param capacity the new capacity of the bag
+     */
+    private void resize(int capacity) {
+        Item[] temp = (Item[]) new Object[capacity];
+        for (int i = 0; i < N; i++) {
+            temp[i] = a[i];
+        }
+        a = temp;
+    }
+
+    /**
      * Adds the item to this bag.
      *
      * @param item the item to add to this bag
@@ -49,11 +57,8 @@ public class LinkedBag<Item> implements IBag<Item> {
     @Override
     public void add(Item item) {
         if (item == null) throw new NullPointerException();
-        Node oldFisrt = first;
-        first = new Node();
-        first.item = item;
-        first.next = oldFisrt;
-        N++;
+        if (N == a.length) resize(a.length * 2);
+        a[N++] = item;
     }
 
     /**
@@ -77,23 +82,21 @@ public class LinkedBag<Item> implements IBag<Item> {
      */
     @Override
     public Iterator<Item> iterator() {
-        return new LinkedBagIterator();
+        return new ResizingArrayBagIterator();
     }
 
-    private class LinkedBagIterator implements Iterator<Item> {
-        private Node current = first;
+    private class ResizingArrayBagIterator implements Iterator<Item> {
+        private int currnet = 0;
 
         @Override
         public boolean hasNext() {
-            return current.next != null;
+            return currnet < N;
         }
 
         @Override
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            Item result = current.item;
-            current = current.next;
-            return result;
+            return a[currnet];
         }
 
         @Override
