@@ -2,7 +2,7 @@
 
 namespace BigEgg.Algorithm.Collections
 {
-    public interface IBag<Item> : IEnumerable<Item>
+    public interface IBag<T> : IEnumerable<T>
     {
         /// <summary>
         /// Is this bag empty?
@@ -21,6 +21,6 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        void Add(Item item);
+        void Add(T item);
     }
 }

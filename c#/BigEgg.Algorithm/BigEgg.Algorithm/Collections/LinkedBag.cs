@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Collections
 {
-    public class LinkedBag<Item> : IBag<Item>
+    public class LinkedBag<T> : IBag<T>
     {
         private Node first;
         private int N;
 
         private class Node
         {
-            public Item Item { get; set; }
+            public T Item { get; set; }
             public Node Next { get; set; }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinkedBag{Item}"/> class.
+        /// Initializes a new instance of the <see cref="LinkedBag{T}"/> class.
         /// </summary>
         public LinkedBag()
         {
@@ -34,9 +34,9 @@ namespace BigEgg.Algorithm.Collections
         }
 
         /// <summary>
-        /// Returns the number of items in the bag.
+        /// Returns the number of Ts in the bag.
         /// </summary>
-        /// <returns>The number of items in the bag.</returns>
+        /// <returns>The number of Ts in the bag.</returns>
         public int Size()
         {
             return N;
@@ -47,7 +47,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        public void Add(Item item)
+        public void Add(T item)
         {
             if (item == null) { throw new ArgumentNullException(); }
             Node oldFirst = first;
@@ -62,7 +62,7 @@ namespace BigEgg.Algorithm.Collections
         /// <summary>
         /// Returns a string representation of this bag.
         /// </summary>
-        /// <returns>The sequence of items in the bag, separated by spaces.</returns>
+        /// <returns>The sequence of Ts in the bag, separated by spaces.</returns>
         public override string ToString()
         {
             return String.Join(" ", this);
@@ -74,7 +74,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the bag.
         /// </returns>
-        public IEnumerator<Item> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return new Enumerator(this);
         }
@@ -90,18 +90,18 @@ namespace BigEgg.Algorithm.Collections
             return new Enumerator(this);
         }
 
-        private class Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
+        private class Enumerator : IEnumerator<T>, IDisposable, IEnumerator
         {
             private Node first;
             private Node current;
 
-            public Enumerator(LinkedBag<Item> bag)
+            public Enumerator(LinkedBag<T> bag)
             {
                 first = bag.first;
                 current = null;
             }
 
-            public Item Current
+            public T Current
             {
                 get { return current.Item; }
             }

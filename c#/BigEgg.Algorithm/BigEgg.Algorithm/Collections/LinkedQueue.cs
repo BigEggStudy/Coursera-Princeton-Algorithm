@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Collections
 {
-    public class LinkedQueue<Item> : IQueue<Item>
+    public class LinkedQueue<T> : IQueue<T>
     {
         private int N;
         private Node first;
@@ -12,12 +12,12 @@ namespace BigEgg.Algorithm.Collections
 
         private class Node
         {
-            public Item Item { get; set; }
+            public T Item { get; set; }
             public Node Next { get; set; }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinkedQueue{Item}"/> class.
+        /// Initializes a new instance of the <see cref="LinkedQueue{T}"/> class.
         /// </summary>
         public LinkedQueue()
         {
@@ -49,7 +49,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        public void Enqueue(Item item)
+        public void Enqueue(T item)
         {
             if (item == null) { throw new ArgumentNullException(); }
             Node oldLast = last;
@@ -66,10 +66,10 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <returns>The item on this queue that was least recently added.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Queue is empty.</exception>
-        public Item Dequeue()
+        public T Dequeue()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
-            Item result = first.Item;
+            T result = first.Item;
             first = first.Next;
             if (IsEmpty()) last = null;
             N--;
@@ -81,7 +81,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <returns>The item least recently added to this queue.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Queue is empty.</exception>
-        public Item Peek()
+        public T Peek()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
             return first.Item;
@@ -102,7 +102,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the items in this queue in FIFO order.
         /// </returns>
-        public IEnumerator<Item> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return new Enumerator(this);
         }
@@ -118,18 +118,18 @@ namespace BigEgg.Algorithm.Collections
             return new Enumerator(this);
         }
 
-        private class Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
+        private class Enumerator : IEnumerator<T>, IDisposable, IEnumerator
         {
             private Node current;
             private Node first;
 
-            public Enumerator(LinkedQueue<Item> queue)
+            public Enumerator(LinkedQueue<T> queue)
             {
                 current = null;
                 first = queue.first;
             }
 
-            public Item Current
+            public T Current
             {
                 get { return current.Item; }
             }

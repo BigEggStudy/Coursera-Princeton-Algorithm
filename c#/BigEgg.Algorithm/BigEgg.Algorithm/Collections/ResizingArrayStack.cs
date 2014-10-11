@@ -4,18 +4,18 @@ using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Collections
 {
-    public class ResizingArrayStack<Item> : IStack<Item>
+    public class ResizingArrayStack<T> : IStack<T>
     {
-        private Item[] a;
+        private T[] a;
         private int N;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ResizingArrayStack{Item}"/> class.
+        /// Initializes a new instance of the <see cref="ResizingArrayStack{T}"/> class.
         /// </summary>
         public ResizingArrayStack()
         {
             N = 0;
-            a = new Item[2];
+            a = new T[2];
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace BigEgg.Algorithm.Collections
         /// <param name="capacity">The new capacity of the stack.</param>
         private void Resize(int capacity)
         {
-            Item[] temp = new Item[capacity];
+            T[] temp = new T[capacity];
             for (int i = 0; i < N; i++)
             {
                 temp[i] = a[i];
@@ -55,7 +55,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        public void Push(Item item)
+        public void Push(T item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
             if (N == a.Length) Resize(a.Length * 2);
@@ -67,11 +67,11 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <returns>The item most recently added.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
-        public Item Pop()
+        public T Pop()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
             var result = a[N - 1];
-            a[N - 1] = default(Item);
+            a[N - 1] = default(T);
             N--;
             if (N == a.Length / 4) Resize(a.Length / 2);
             return result;
@@ -82,7 +82,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <returns>The item most recently added to this stack.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
-        public Item Peek()
+        public T Peek()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
             return a[N - 1];
@@ -103,7 +103,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the items in LIFO order.
         /// </returns>
-        public IEnumerator<Item> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return new Enumerator(this);
         }
@@ -119,13 +119,13 @@ namespace BigEgg.Algorithm.Collections
             return new Enumerator(this);
         }
 
-        private struct Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
+        private struct Enumerator : IEnumerator<T>, IDisposable, IEnumerator
         {
-            private Item[] a;
+            private T[] a;
             private int i;
             private int N;
 
-            public Enumerator(ResizingArrayStack<Item> stack)
+            public Enumerator(ResizingArrayStack<T> stack)
             {
                 a = stack.a;
                 i = stack.N;
@@ -133,7 +133,7 @@ namespace BigEgg.Algorithm.Collections
             }
 
 
-            public Item Current
+            public T Current
             {
                 get { return a[i]; }
             }

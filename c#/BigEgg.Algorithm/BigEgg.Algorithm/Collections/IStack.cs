@@ -2,7 +2,7 @@
 
 namespace BigEgg.Algorithm.Collections
 {
-    public interface IStack<Item> : IEnumerable<Item>
+    public interface IStack<T> : IEnumerable<T>
     {
         /// <summary>
         /// Is this stack empty?
@@ -21,20 +21,20 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        void Push(Item item);
+        void Push(T item);
 
         /// <summary>
         /// Removes and returns the item most recently added to this stack.
         /// </summary>
         /// <returns>The item most recently added.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
-        Item Pop();
+        T Pop();
 
         /// <summary>
         /// Returns (but does not remove) the item most recently added to this stack.
         /// </summary>
         /// <returns>The item most recently added to this stack.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
-        Item Peek();
+        T Peek();
     }
 }

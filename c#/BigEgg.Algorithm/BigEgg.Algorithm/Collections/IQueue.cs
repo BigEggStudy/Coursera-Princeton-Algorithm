@@ -2,7 +2,7 @@
 
 namespace BigEgg.Algorithm.Collections
 {
-    public interface IQueue<Item> : IEnumerable<Item>
+    public interface IQueue<T> : IEnumerable<T>
     {
         /// <summary>
         /// Is this queue empty?
@@ -21,20 +21,20 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        void Enqueue(Item item);
+        void Enqueue(T item);
 
         /// <summary>
         /// Removes and returns the item on this queue that was least recently added.
         /// </summary>
         /// <returns>The item on this queue that was least recently added.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Queue is empty.</exception>
-        Item Dequeue();
+        T Dequeue();
 
         /// <summary>
         /// Returns (but does not remove) the item least recently added to this queue.
         /// </summary>
         /// <returns>The item least recently added to this queue.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Queue is empty.</exception>
-        Item Peek();
+        T Peek();
     }
 }

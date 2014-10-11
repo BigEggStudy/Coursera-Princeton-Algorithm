@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Collections
 {
-    public class ResizingArrayBag<Item> : IBag<Item>
+    public class ResizingArrayBag<T> : IBag<T>
     {
-        private Item[] a;
+        private T[] a;
         private int N;
 
         public ResizingArrayBag()
         {
             N = 0;
-            a = new Item[2];
+            a = new T[2];
         }
 
         /// <summary>
@@ -33,9 +33,13 @@ namespace BigEgg.Algorithm.Collections
             return N;
         }
 
+        /// <summary>
+        /// Resize the underlying array holding the elements.
+        /// </summary>
+        /// <param name="capacity">The new capacity of the bag.</param>
         private void Resize(int capacity)
         {
-            Item[] temp = new Item[capacity];
+            T[] temp = new T[capacity];
             for (int i = 0; i < N; i++)
             {
                 temp[i] = a[i];
@@ -48,7 +52,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        public void Add(Item item)
+        public void Add(T item)
         {
             if (item == null) { throw new ArgumentNullException(); }
             if (N == a.Length) Resize(2 * a.Length);
@@ -70,7 +74,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the bag.
         /// </returns>
-        public IEnumerator<Item> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return new Enumerator(this);
         }
@@ -86,19 +90,19 @@ namespace BigEgg.Algorithm.Collections
             return new Enumerator(this);
         }
 
-        private class Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
+        private class Enumerator : IEnumerator<T>, IDisposable, IEnumerator
         {
             private int i = -1;
             private int N;
-            private Item[] a;
+            private T[] a;
 
-            public Enumerator(ResizingArrayBag<Item> bag)
+            public Enumerator(ResizingArrayBag<T> bag)
             {
                 a = bag.a;
                 N = bag.N;
             }
 
-            public Item Current
+            public T Current
             {
                 get { return a[i]; }
             }

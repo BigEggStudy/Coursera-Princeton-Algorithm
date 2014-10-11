@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Collections
 {
-    public class LinkedStack<Item> : IStack<Item>
+    public class LinkedStack<T> : IStack<T>
     {
         private int N;
         private Node first;
 
         private class Node
         {
-            public Item Item { get; set; }
+            public T Item { get; set; }
             public Node Next { get; set; }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinkedStack{Item}"/> class.
+        /// Initializes a new instance of the <see cref="LinkedStack{T}"/> class.
         /// </summary>
         public LinkedStack()
         {
@@ -47,7 +47,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <exception cref="System.ArgumentNullException">Item cannot be null.</exception>
-        public void Push(Item item)
+        public void Push(T item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
             var oldFirst = first;
@@ -62,7 +62,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <returns>The item most recently added.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
-        public Item Pop()
+        public T Pop()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
             var result = first.Item;
@@ -76,7 +76,7 @@ namespace BigEgg.Algorithm.Collections
         /// </summary>
         /// <returns>The item most recently added to this stack.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Stack is empty.</exception>
-        public Item Peek()
+        public T Peek()
         {
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
             return first.Item;
@@ -97,7 +97,7 @@ namespace BigEgg.Algorithm.Collections
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the items in LIFO order.
         /// </returns>
-        public IEnumerator<Item> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return new Enumerator(this);
         }
@@ -113,19 +113,19 @@ namespace BigEgg.Algorithm.Collections
             return new Enumerator(this);
         }
 
-        private struct Enumerator : IEnumerator<Item>, IDisposable, IEnumerator
+        private struct Enumerator : IEnumerator<T>, IDisposable, IEnumerator
         {
             private Node current;
             private Node first;
 
-            public Enumerator(LinkedStack<Item> stack)
+            public Enumerator(LinkedStack<T> stack)
             {
                 current = null;
                 first = stack.first;
             }
 
 
-            public Item Current
+            public T Current
             {
                 get { return current.Item; }
             }
