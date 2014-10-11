@@ -120,7 +120,7 @@ namespace BigEgg.Algorithm.Collections
 
             public Enumerator(LinkedStack<Item> stack)
             {
-                current = stack.first;
+                current = null;
                 first = stack.first;
             }
 
@@ -142,7 +142,10 @@ namespace BigEgg.Algorithm.Collections
 
             public bool MoveNext()
             {
-                current = current.Next;
+                if (first == null) return false;
+                else
+                    if (current == null) current = first;
+                    else current = current.Next;
                 return current != null;
             }
 
