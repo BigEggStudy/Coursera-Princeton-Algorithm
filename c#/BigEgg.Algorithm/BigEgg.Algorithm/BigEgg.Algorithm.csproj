@@ -33,6 +33,17 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\IBag.cs" />
+    <Compile Include="Collections\IQueue.cs" />
+    <Compile Include="Collections\IStack.cs" />
+    <Compile Include="Collections\LinkedBag.cs" />
+    <Compile Include="Collections\LinkedQueue.cs" />
+    <Compile Include="Collections\LinkedStack.cs" />
+    <Compile Include="Collections\ResizingArrayBag.cs" />
+    <Compile Include="Collections\ResizingArrayQueue.cs" />
+    <Compile Include="Collections\ResizingArrayStack.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BinarySearch.cs" />
     <Compile Include="UnionFinds\QuickFindUF.cs" />

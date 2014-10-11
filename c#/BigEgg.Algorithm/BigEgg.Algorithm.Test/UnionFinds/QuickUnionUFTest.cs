@@ -8,7 +8,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
     public class QuickUnionUFTest
     {
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testUnion_ParameterValidation_PLessThan0()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -16,7 +16,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testUnion_ParameterValidation_PEqualN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -24,7 +24,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testUnion_ParameterValidation_PLargerThanN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -32,7 +32,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testUnion_ParameterValidation_QLessThan0()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -40,7 +40,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testUnion_ParameterValidation_QEqualN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -48,7 +48,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testUnion_ParameterValidation_QLargerThanN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -56,7 +56,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testConnected_ParameterValidation_PLessThan0()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -64,7 +64,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testConnected_ParameterValidation_PEqualN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -72,7 +72,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testConnected_ParameterValidation_PLargerThanN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -80,7 +80,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testConnected_ParameterValidation_QLessThan0()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -88,7 +88,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testConnected_ParameterValidation_QEqualN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -96,7 +96,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testConnected_ParameterValidation_QLargerThanN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -104,7 +104,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testFind_ParameterValidation_PLessThan0()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -112,7 +112,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testFind_ParameterValidation_PEqualN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);
@@ -120,7 +120,7 @@ namespace BigEgg.Algorithm.Test.UnionFinds
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void testFind_ParameterValidation_PLargerThanN()
         {
             QuickUnionUF quickUnionUF = new QuickUnionUF(10);

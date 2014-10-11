@@ -18,11 +18,11 @@ namespace BigEgg.Algorithm.UnionFinds
         /// </summary>
         /// <param name="p">The integer representing one site.</param>
         /// <param name="q">The integer representing the other site.</param>
-        /// <exception cref="System.IndexOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
         public override void Union(int p, int q)
         {
-            if (p < 0 || p >= id.Length) { throw new IndexOutOfRangeException(); }
-            if (q < 0 || q >= id.Length) { throw new IndexOutOfRangeException(); }
+            if (p < 0 || p >= id.Length) { throw new ArgumentOutOfRangeException(); }
+            if (q < 0 || q >= id.Length) { throw new ArgumentOutOfRangeException(); }
 
             int pid = id[p];
             int qid = id[q];
@@ -39,11 +39,11 @@ namespace BigEgg.Algorithm.UnionFinds
         /// <param name="p">The integer representing one site.</param>
         /// <param name="q">The integer representing the other site.</param>
         /// <returns><c>True</c> if the two sites <c>p</c> and <c>q</c> are in the same component, and <c>false</c> otherwise.</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
         public override bool Connected(int p, int q)
         {
-            if (p < 0 || p >= id.Length) { throw new IndexOutOfRangeException(); }
-            if (q < 0 || q >= id.Length) { throw new IndexOutOfRangeException(); }
+            if (p < 0 || p >= id.Length) { throw new ArgumentOutOfRangeException(); }
+            if (q < 0 || q >= id.Length) { throw new ArgumentOutOfRangeException(); }
 
             return id[p] == id[q];
         }
@@ -53,9 +53,11 @@ namespace BigEgg.Algorithm.UnionFinds
         /// </summary>
         /// <param name="p">The integer representing one site.</param>
         /// <returns>The component identifier for the component containing site <c>p</c>.</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Throw unless both 0 <= p < N.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N.</exception>
         public override int Find(int p)
         {
+            if (p < 0 || p >= id.Length) { throw new ArgumentOutOfRangeException(); }
+
             return id[p];
         }
     }

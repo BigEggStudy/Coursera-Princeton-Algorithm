@@ -29,7 +29,7 @@ namespace BigEgg.Algorithm.UnionFinds
         /// </summary>
         /// <param name="p">The integer representing one site.</param>
         /// <param name="q">The integer representing the other site.</param>
-        /// <exception cref="System.IndexOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
         public abstract void Union(int p, int q);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace BigEgg.Algorithm.UnionFinds
         /// <param name="p">The integer representing one site.</param>
         /// <param name="q">The integer representing the other site.</param>
         /// <returns><c>True</c> if the two sites <c>p</c> and <c>q</c> are in the same component, and <c>false</c> otherwise.</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
         public abstract bool Connected(int p, int q);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace BigEgg.Algorithm.UnionFinds
         /// </summary>
         /// <param name="p">The integer representing one site.</param>
         /// <returns>The component identifier for the component containing site <c>p</c>.</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Throw unless both 0 <= p < N.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N.</exception>
         public abstract int Find(int p);
     }
 }
