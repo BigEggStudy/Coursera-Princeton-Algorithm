@@ -135,7 +135,7 @@ namespace BigEgg.Algorithm.Collections
 
             public Item Current
             {
-                get { return a[i - 1]; }
+                get { return a[i]; }
             }
 
             public void Dispose()
@@ -146,13 +146,13 @@ namespace BigEgg.Algorithm.Collections
 
             object System.Collections.IEnumerator.Current
             {
-                get { return a[i - 1]; }
+                get { return a[i]; }
             }
 
             public bool MoveNext()
             {
                 i--;
-                return i > 0;
+                return i >= 0;
             }
 
             public void Reset()
