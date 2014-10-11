@@ -56,6 +56,8 @@ namespace BigEgg.Algorithm.UnionFinds
         /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N.</exception>
         public override int Find(int p)
         {
+            if (p < 0 || p >= id.Length) { throw new ArgumentOutOfRangeException(); }
+
             return id[p];
         }
     }
