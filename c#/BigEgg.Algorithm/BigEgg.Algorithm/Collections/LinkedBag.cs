@@ -68,11 +68,23 @@ namespace BigEgg.Algorithm.Collections
             return String.Join(" ", this);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the bag.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the bag.
+        /// </returns>
         public IEnumerator<Item> GetEnumerator()
         {
             return new Enumerator(this);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through a bag.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the bag.
+        /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new Enumerator(this);
