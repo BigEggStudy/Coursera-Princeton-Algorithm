@@ -96,7 +96,7 @@ public class ResizingArrayBag<Item> implements IBag<Item> {
         @Override
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            return a[currnet];
+            return a[currnet++];
         }
 
         @Override

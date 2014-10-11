@@ -85,7 +85,7 @@ public class LinkedBag<Item> implements IBag<Item> {
 
         @Override
         public boolean hasNext() {
-            return current.next != null;
+            return current != null;
         }
 
         @Override
