@@ -26,11 +26,11 @@ namespace BigEgg.Algorithm.UnionFinds
         /// </summary>
         /// <param name="p">The integer representing one site.</param>
         /// <param name="q">The integer representing the other site.</param>
-        /// <exception cref="System.IndexOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Throw unless both 0 <= p < N and 0 <= q < N.</exception>
         public override void Union(int p, int q)
         {
-            if (p < 0 || p >= id.Length) { throw new IndexOutOfRangeException(); }
-            if (q < 0 || q >= id.Length) { throw new IndexOutOfRangeException(); }
+            if (p < 0 || p >= id.Length) { throw new ArgumentOutOfRangeException(); }
+            if (q < 0 || q >= id.Length) { throw new ArgumentOutOfRangeException(); }
 
             int pRoot = Find(p);
             int qRoot = Find(q);
