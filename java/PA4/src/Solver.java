@@ -42,12 +42,15 @@ public class Solver {
                 results.insert(node);
                 continue;
             }
-            for (Board neighbors : node.board.neighbors()) {
-                if (node.previousNode != null && neighbors == node.previousNode.board) {
+            for (Board neighbor : node.board.neighbors()) {
+                if (node.previousNode != null && neighbor.equals(node.previousNode.board)) {
+                    continue;
+                }
+                if (!results.isEmpty() && node.moves + 1 > results.min().moves) {
                     continue;
                 }
                 SearchNode newNode = new SearchNode();
-                newNode.board = neighbors;
+                newNode.board = neighbor;
                 newNode.moves = node.moves + 1;
                 newNode.previousNode = node;
                 pq.insert(newNode);
