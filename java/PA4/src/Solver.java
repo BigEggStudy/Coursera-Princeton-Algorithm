@@ -4,6 +4,7 @@
 public class Solver {
     private MinPQ<SearchNode> pq;
     private SearchNode goalNode;
+    private Board initialBoard;
 
     private class SearchNode implements Comparable<SearchNode> {
         private Board board;
@@ -29,11 +30,17 @@ public class Solver {
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         pq = new MinPQ<SearchNode>();
+        initialBoard = initial;
 
         SearchNode initialNode = new SearchNode();
         initialNode.board = initial;
         initialNode.moves = 0;
         pq.insert(initialNode);
+
+        SearchNode twinNode = new SearchNode();
+        twinNode.board = initialBoard.twin();
+        twinNode.moves = 0;
+        pq.insert(twinNode);
 
         while (!pq.isEmpty()) {
             SearchNode node = pq.delMin();
@@ -56,7 +63,15 @@ public class Solver {
 
     // is the initial board solvable?
     public boolean isSolvable() {
-        return goalNode != null;
+        SearchNode current = goalNode;
+        while (current.previousNode != null) {
+            current = current.previousNode;
+        }
+
+        if (current.board.equals(initialBoard))
+            return true;
+        else
+            return false;
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
@@ -70,6 +85,8 @@ public class Solver {
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
+        if (!isSolvable()) return null;
+
         Stack<Board> result = new Stack<Board>();
         while (goalNode != null) {
             result.push(goalNode.board);
