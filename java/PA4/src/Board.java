@@ -137,7 +137,7 @@ public class Board {
         int deltaManhattan = (Math.abs(blankCol + deltaCol - goalCol) + Math.abs(blankRow + deltaRow - goalRow)) -
                 (Math.abs(blankCol - goalCol) + Math.abs(blankRow - goalRow));
         int deltaHamming = block != index + 1 ? 1 : 0;
-        deltaHamming -= block != index + 1 - deltaCol + N * deltaRow ? 1 : 0;
+        deltaHamming -= block != index + 1 - deltaCol - N * deltaRow ? 1 : 0;
         return new Board(exch(blankRow + deltaRow, blankCol + deltaCol, blankRow, blankCol), N, hammingSum - deltaHamming, manhattanSum - deltaManhattan, blankRow + deltaRow, blankCol + deltaCol);
     }
 
