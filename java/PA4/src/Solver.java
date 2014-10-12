@@ -3,7 +3,7 @@
  */
 public class Solver {
     private MinPQ<SearchNode> pq;
-    private MinPQ<SearchNode> results;
+    private SearchNode goalNode;
 
     private class SearchNode implements Comparable<SearchNode> {
         private Board board;
@@ -29,7 +29,6 @@ public class Solver {
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         pq = new MinPQ<SearchNode>();
-        results = new MinPQ<SearchNode>();
 
         SearchNode initialNode = new SearchNode();
         initialNode.board = initial;
@@ -39,18 +38,11 @@ public class Solver {
         while (!pq.isEmpty()) {
             SearchNode node = pq.delMin();
             if (node.board.isGoal()) {
-                results.insert(node);
-                StdOut.println(pq.size());
-                if (results.size() == 5)
-                    break;
-                else
-                    continue;
+                goalNode = node;
+                break;
             }
             for (Board neighbor : node.board.neighbors()) {
                 if (node.previousNode != null && neighbor.equals(node.previousNode.board)) {
-                    continue;
-                }
-                if (!results.isEmpty() && node.moves + 1 > results.min().moves) {
                     continue;
                 }
                 SearchNode newNode = new SearchNode();
@@ -64,25 +56,24 @@ public class Solver {
 
     // is the initial board solvable?
     public boolean isSolvable() {
-        return !results.isEmpty();
+        return goalNode != null;
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        if (results.isEmpty()) {
+        if (!isSolvable()) {
             return -1;
         } else {
-            return results.min().moves;
+            return goalNode.moves;
         }
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
         Stack<Board> result = new Stack<Board>();
-        SearchNode minMove = results.delMin();
-        while (minMove != null) {
-            result.push(minMove.board);
-            minMove = minMove.previousNode;
+        while (goalNode != null) {
+            result.push(goalNode.board);
+            goalNode = goalNode.previousNode;
         }
         return result;
     }
