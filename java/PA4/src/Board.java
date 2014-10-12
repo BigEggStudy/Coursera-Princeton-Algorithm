@@ -30,8 +30,8 @@ public class Board {
                     continue;
                 }
 
-                int goalRow = blocks[i][j] / N;
-                int goalCol = blocks[i][j] % N;
+                int goalRow = (blocks[i][j] - 1) / N;
+                int goalCol = (blocks[i][j] - 1) % N;
                 manhattanSum += Math.abs(j - goalCol) + Math.abs(i - goalRow);
 
                 if (blocks[i][j] != index + 1) hammingSum++;
@@ -83,8 +83,8 @@ public class Board {
 
         int index1 = exchRow * N;
         char block1 = a[index1];
-        int goalRow1 = block1 / N;
-        int goalCol1 = block1 % N;
+        int goalRow1 = (block1 - 1) / N;
+        int goalCol1 = (block1 - 1) % N;
         int deltaManhattan1 = Math.abs(0 - goalCol1) + Math.abs(exchRow - goalRow1) -
                 Math.abs(1 - goalCol1) + Math.abs(exchRow - goalRow1);
         int deltaHamming1 = block1 != index1 + 1 ? 1 : 0;
@@ -92,8 +92,8 @@ public class Board {
 
         int index2 = exchRow * N + 1;
         char block2 = a[index2];
-        int goalRow2 = block2 / N;
-        int goalCol2 = block2 % N;
+        int goalRow2 = (block2 - 1) / N;
+        int goalCol2 = (block2 - 1) % N;
         int deltaManhattan2 = Math.abs(1 - goalCol2) + Math.abs(exchRow - goalRow2) -
                 Math.abs(0 - goalCol2) + Math.abs(exchRow - goalRow2);
         int deltaHamming2 = block1 != index1 + 1 ? 1 : 0;
@@ -132,8 +132,8 @@ public class Board {
     private Board getNeighbor(int deltaRow, int deltaCol) {
         int index = (blankRow + deltaRow) * N + (blankCol + deltaCol);
         char block = a[index];
-        int goalRow = block / N;
-        int goalCol = block % N;
+        int goalRow = (block - 1) / N;
+        int goalCol = (block - 1) % N;
         int deltaManhattan = Math.abs(blankCol + deltaCol - goalCol) + Math.abs(blankRow + deltaRow - goalRow) -
                 Math.abs(blankCol - goalCol) + Math.abs(blankRow - goalRow);
         int deltaHamming = block != index + 1 ? 1 : 0;
@@ -159,7 +159,7 @@ public class Board {
         s.append(N);
         for (int i = 0; i < a.length; i++) {
             if (i % N == 0) s.append("\n");
-            s.append(String.format("%2c ", a[i]));
+            s.append(String.format("%2d ", (int) a[i]));
         }
         return s.toString();
     }

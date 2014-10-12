@@ -36,7 +36,7 @@ public class Solver {
         initialNode.moves = 0;
         pq.insert(initialNode);
 
-        while (pq.isEmpty()) {
+        while (!pq.isEmpty()) {
             SearchNode node = pq.delMin();
             if (node.board.isGoal()) {
                 results.insert(node);
