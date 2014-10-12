@@ -40,7 +40,11 @@ public class Solver {
             SearchNode node = pq.delMin();
             if (node.board.isGoal()) {
                 results.insert(node);
-                continue;
+                StdOut.println(pq.size());
+                if (results.size() == 5)
+                    break;
+                else
+                    continue;
             }
             for (Board neighbor : node.board.neighbors()) {
                 if (node.previousNode != null && neighbor.equals(node.previousNode.board)) {
