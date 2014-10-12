@@ -85,8 +85,8 @@ public class Board {
         char block1 = a[index1];
         int goalRow1 = (block1 - 1) / N;
         int goalCol1 = (block1 - 1) % N;
-        int deltaManhattan1 = Math.abs(0 - goalCol1) + Math.abs(exchRow - goalRow1) -
-                Math.abs(1 - goalCol1) + Math.abs(exchRow - goalRow1);
+        int deltaManhattan1 = (Math.abs(0 - goalCol1) + Math.abs(exchRow - goalRow1)) -
+                (Math.abs(1 - goalCol1) + Math.abs(exchRow - goalRow1));
         int deltaHamming1 = block1 != index1 + 1 ? 1 : 0;
         deltaHamming1 -= block1 != index1 + 2 ? 1 : 0;
 
@@ -94,8 +94,8 @@ public class Board {
         char block2 = a[index2];
         int goalRow2 = (block2 - 1) / N;
         int goalCol2 = (block2 - 1) % N;
-        int deltaManhattan2 = Math.abs(1 - goalCol2) + Math.abs(exchRow - goalRow2) -
-                Math.abs(0 - goalCol2) + Math.abs(exchRow - goalRow2);
+        int deltaManhattan2 = (Math.abs(1 - goalCol2) + Math.abs(exchRow - goalRow2)) -
+                (Math.abs(0 - goalCol2) + Math.abs(exchRow - goalRow2));
         int deltaHamming2 = block1 != index1 + 1 ? 1 : 0;
         deltaHamming2 -= block1 != index1 ? 1 : 0;
 
@@ -134,11 +134,11 @@ public class Board {
         char block = a[index];
         int goalRow = (block - 1) / N;
         int goalCol = (block - 1) % N;
-        int deltaManhattan = Math.abs(blankCol + deltaCol - goalCol) + Math.abs(blankRow + deltaRow - goalRow) -
-                Math.abs(blankCol - goalCol) + Math.abs(blankRow - goalRow);
+        int deltaManhattan = (Math.abs(blankCol + deltaCol - goalCol) + Math.abs(blankRow + deltaRow - goalRow)) -
+                (Math.abs(blankCol - goalCol) + Math.abs(blankRow - goalRow));
         int deltaHamming = block != index + 1 ? 1 : 0;
         deltaHamming -= block != index + 1 - deltaCol + N * deltaRow ? 1 : 0;
-        return new Board(exch(blankRow + deltaRow, blankCol + deltaCol, blankRow, blankCol), N, hammingSum - deltaHamming, manhattanSum - deltaManhattan, blankRow, blankCol - 1);
+        return new Board(exch(blankRow + deltaRow, blankCol + deltaCol, blankRow, blankCol), N, hammingSum - deltaHamming, manhattanSum - deltaManhattan, blankRow + deltaRow, blankCol + deltaCol);
     }
 
     private char[] exch(int row1, int col1, int row2, int col2) {
