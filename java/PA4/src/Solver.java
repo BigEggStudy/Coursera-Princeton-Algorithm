@@ -3,6 +3,7 @@
  */
 public class Solver {
     private MinPQ<SearchNode> pq;
+    private MinPQ<SearchNode> twinPQ;
     private SearchNode goalNode;
     private Board initialBoard;
 
@@ -30,6 +31,7 @@ public class Solver {
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         pq = new MinPQ<SearchNode>();
+        twinPQ = new MinPQ<SearchNode>();
         initialBoard = initial;
 
         SearchNode initialNode = new SearchNode();
@@ -37,32 +39,46 @@ public class Solver {
         initialNode.moves = 0;
         pq.insert(initialNode);
 
-        SearchNode twinNode = new SearchNode();
-        twinNode.board = initialBoard.twin();
-        twinNode.moves = 0;
-        pq.insert(twinNode);
+        SearchNode twinInitial = new SearchNode();
+        twinInitial.board = initialBoard.twin();
+        twinInitial.moves = 0;
+        twinPQ.insert(twinInitial);
 
-        while (!pq.isEmpty()) {
-            SearchNode node = pq.delMin();
-            if (node.board.isGoal()) {
-                goalNode = node;
+        while (true) {
+            SearchNode result = produce(pq);
+            if (result != null) {
+                goalNode = result;
                 break;
             }
-            for (Board neighbor : node.board.neighbors()) {
-                if (node.previousNode != null && neighbor.equals(node.previousNode.board)) {
-                    continue;
-                }
-                SearchNode newNode = new SearchNode();
-                newNode.board = neighbor;
-                newNode.moves = node.moves + 1;
-                newNode.previousNode = node;
-                pq.insert(newNode);
+            result = produce(twinPQ);
+            if (result != null) {
+                break;
             }
         }
     }
 
+    private SearchNode produce(MinPQ<SearchNode> pq) {
+        SearchNode node = pq.delMin();
+        if (node.board.isGoal()) {
+            return node;
+        }
+        for (Board neighbor : node.board.neighbors()) {
+            if (node.previousNode != null && neighbor.equals(node.previousNode.board)) {
+                continue;
+            }
+            SearchNode newNode = new SearchNode();
+            newNode.board = neighbor;
+            newNode.moves = node.moves + 1;
+            newNode.previousNode = node;
+            pq.insert(newNode);
+        }
+        return null;
+    }
+
     // is the initial board solvable?
     public boolean isSolvable() {
+        if (goalNode == null) return false;
+
         SearchNode current = goalNode;
         while (current.previousNode != null) {
             current = current.previousNode;
@@ -88,9 +104,10 @@ public class Solver {
         if (!isSolvable()) return null;
 
         Stack<Board> result = new Stack<Board>();
-        while (goalNode != null) {
-            result.push(goalNode.board);
-            goalNode = goalNode.previousNode;
+        SearchNode current = goalNode;
+        while (current != null) {
+            result.push(current.board);
+            current = current.previousNode;
         }
         return result;
     }
