@@ -77,17 +77,7 @@ public class Solver {
 
     // is the initial board solvable?
     public boolean isSolvable() {
-        if (goalNode == null) return false;
-
-        SearchNode current = goalNode;
-        while (current.previousNode != null) {
-            current = current.previousNode;
-        }
-
-        if (current.board.equals(initialBoard))
-            return true;
-        else
-            return false;
+        return goalNode != null;
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
