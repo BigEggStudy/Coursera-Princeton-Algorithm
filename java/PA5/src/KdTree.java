@@ -113,12 +113,49 @@ public class KdTree {
         drawPoint(pointNode.lb, !useX);
         drawPoint(pointNode.rt, !useX);
     }
-//
-//    public Iterable<Point2D> range(RectHV rect) {
-//    }
-//
-//    public Point2D nearest(Point2D p) {
-//    }
+
+    public Iterable<Point2D> range(RectHV rect) {
+        Stack<Point2D> result = new Stack<Point2D>();
+        range(result, root, rect, true);
+        return result;
+    }
+
+    public void range(Stack<Point2D> result, Node pointNode, RectHV rectHV, boolean useX) {
+        if (pointNode == null) return;
+
+        Point2D point = pointNode.p;
+        if (rectHV.contains(point)) result.push(point);
+        if (useX) {
+            if (rectHV.xmin() < point.x()) range(result, pointNode.lb, rectHV, !useX);
+            if (rectHV.xmax() >= point.x()) range(result, pointNode.rt, rectHV, !useX);
+        } else {
+            if (rectHV.ymin() < point.y()) range(result, pointNode.lb, rectHV, !useX);
+            if (rectHV.ymax() >= point.y()) range(result, pointNode.rt, rectHV, !useX);
+        }
+    }
+
+    public Point2D nearest(Point2D p) {
+        if (isEmpty()) return null;
+
+        return nearest(root, p, Double.POSITIVE_INFINITY, null);
+    }
+
+    public Point2D nearest(Node pointNode, Point2D p, double distance, Point2D nearestPoint) {
+        if (pointNode == null) return nearestPoint;
+
+        double newDistance = p.distanceSquaredTo(pointNode.p);
+        if (distance > newDistance) {
+            nearestPoint = pointNode.p;
+            distance = newDistance;
+        }
+
+        if (pointNode.lb != null && pointNode.lb.rect.contains(p))
+            nearestPoint = nearest(pointNode.lb, p, distance, nearestPoint);
+        if (pointNode.rt != null && pointNode.rt.rect.distanceSquaredTo(p) < distance)
+            nearestPoint = nearest(pointNode.rt, p, distance, nearestPoint);
+
+        return nearestPoint;
+    }
 
     // unit testing of the methods (optional)
     public static void main(String[] args) {
@@ -145,5 +182,9 @@ public class KdTree {
         assert !tree.contains(new Point2D(0.24, 0.75));
 
         tree.draw();
+        Iterable<Point2D> range = tree.range(new RectHV(0.49, 0.49, 0.51, 0.51));
+        Point2D nearest = tree.nearest(new Point2D(0.06, 0.49));
+        assert nearest.x() == 0.25;
+        assert nearest.y() == 0.4;
     }
 }
