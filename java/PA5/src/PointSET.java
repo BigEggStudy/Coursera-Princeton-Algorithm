@@ -73,5 +73,30 @@ public class PointSET {
 
     // unit testing of the methods (optional)
     public static void main(String[] args) {
+        PointSET set = new PointSET();
+        assert set.isEmpty();
+        assert set.size() == 0;
+
+        set.insert(new Point2D(0.5, 0.5));
+        set.insert(new Point2D(0.25, 0.5));
+        set.insert(new Point2D(0.75, 0.5));
+        set.insert(new Point2D(0.25, 0.25));
+        set.insert(new Point2D(0.25, 0.75));
+        assert !set.isEmpty();
+        assert set.size() == 5;
+
+        assert set.contains(new Point2D(0.5, 0.5));
+        assert set.contains(new Point2D(0.25, 0.5));
+        assert set.contains(new Point2D(0.75, 0.5));
+        assert set.contains(new Point2D(0.25, 0.25));
+        assert set.contains(new Point2D(0.25, 0.75));
+        assert !set.contains(new Point2D(0.25, 0.74));
+        assert !set.contains(new Point2D(0.24, 0.75));
+
+        set.draw();
+        Iterable<Point2D> range = set.range(new RectHV(0.49, 0.49, 0.51, 0.51));
+        Point2D nearest = set.nearest(new Point2D(0.49, 0.49));
+        assert nearest.x() == 0.5;
+        assert nearest.y() == 0.5;
     }
 }
