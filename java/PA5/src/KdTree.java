@@ -41,20 +41,24 @@ public class KdTree {
         }
 
         int cmp = comparePoint(rootNode.p, newPoint, useX);
+        final double xmin = rectHV.xmin();
+        final double xmax = rectHV.xmax();
+        final double ymin = rectHV.ymin();
+        final double ymax = rectHV.ymax();
         if (useX) {
             if (cmp < 0)
                 rootNode.lb = insert(rootNode.lb, newPoint, !useX,
-                        new RectHV(rectHV.xmin(), rectHV.ymin(), rootNode.p.x(), rectHV.ymax()));
+                        new RectHV(xmin, ymin, rootNode.p.x(), ymax));
             else if (cmp > 0)
                 rootNode.rt = insert(rootNode.rt, newPoint, !useX,
-                        new RectHV(rootNode.p.x(), rectHV.ymin(), rectHV.xmax(), rectHV.ymax()));
+                        new RectHV(rootNode.p.x(), ymin, xmax, ymax));
         } else {
             if (cmp < 0)
                 rootNode.lb = insert(rootNode.lb, newPoint, !useX,
-                        new RectHV(rectHV.xmin(), rectHV.ymin(), rectHV.xmax(), rootNode.p.y()));
+                        new RectHV(xmin, ymin, xmax, rootNode.p.y()));
             else if (cmp > 0)
                 rootNode.rt = insert(rootNode.rt, newPoint, !useX,
-                        new RectHV(rectHV.xmin(), rootNode.p.y(), rectHV.xmax(), rectHV.ymax()));
+                        new RectHV(xmin, rootNode.p.y(), xmax, ymax));
         }
         return rootNode;
     }
@@ -126,22 +130,25 @@ public class KdTree {
         Point2D point = pointNode.p;
         if (rectHV.contains(point)) result.push(point);
         if (useX) {
-            if (rectHV.xmin() < point.x()) range(result, pointNode.lb, rectHV, !useX);
-            if (rectHV.xmax() >= point.x()) range(result, pointNode.rt, rectHV, !useX);
+            final double x = point.x();
+            if (rectHV.xmin() < x) range(result, pointNode.lb, rectHV, !useX);
+            if (rectHV.xmax() >= x) range(result, pointNode.rt, rectHV, !useX);
         } else {
-            if (rectHV.ymin() < point.y()) range(result, pointNode.lb, rectHV, !useX);
-            if (rectHV.ymax() >= point.y()) range(result, pointNode.rt, rectHV, !useX);
+            final double y = point.y();
+            if (rectHV.ymin() < y) range(result, pointNode.lb, rectHV, !useX);
+            if (rectHV.ymax() >= y) range(result, pointNode.rt, rectHV, !useX);
         }
     }
 
     public Point2D nearest(Point2D p) {
         if (isEmpty()) return null;
 
-        return nearest(root, p, Double.POSITIVE_INFINITY, null);
+        Nearest result = nearest(root, p, Double.POSITIVE_INFINITY, null);
+        return result.point2D;
     }
 
-    private Point2D nearest(Node pointNode, Point2D p, double distance, Point2D nearestPoint) {
-        if (pointNode == null) return nearestPoint;
+    private Nearest nearest(Node pointNode, Point2D p, double distance, Point2D nearestPoint) {
+        if (pointNode == null) return new Nearest(nearestPoint, distance);
 
         double newDistance = p.distanceSquaredTo(pointNode.p);
         if (distance > newDistance) {
@@ -149,12 +156,27 @@ public class KdTree {
             distance = newDistance;
         }
 
+        Nearest result = new Nearest(nearestPoint, distance);
         if (pointNode.lb != null)
-            nearestPoint = nearest(pointNode.lb, p, distance, nearestPoint);
+            result = nearest(pointNode.lb, p, distance, nearestPoint);
+        if (result != null) {
+            nearestPoint = result.point2D;
+            distance = result.distance;
+        }
         if (pointNode.rt != null && pointNode.rt.rect.distanceSquaredTo(p) < distance)
-            nearestPoint = nearest(pointNode.rt, p, distance, nearestPoint);
+            result = nearest(pointNode.rt, p, distance, nearestPoint);
 
-        return nearestPoint;
+        return result;
+    }
+
+    public class Nearest {
+        private Point2D point2D;
+        private double distance;
+
+        public Nearest(Point2D point2D, double distance) {
+            this.point2D = point2D;
+            this.distance = distance;
+        }
     }
 
     // unit testing of the methods (optional)
@@ -164,13 +186,14 @@ public class KdTree {
         assert tree.size() == 0;
 
         tree.insert(new Point2D(0.5, 0.5));
+        tree.insert(new Point2D(0.5, 0.9));
         tree.insert(new Point2D(0.25, 0.4));
         tree.insert(new Point2D(0.75, 0.6));
         tree.insert(new Point2D(0.15, 0.25));
         tree.insert(new Point2D(0.35, 0.85));
         tree.insert(new Point2D(0.05, 0.75));
         assert !tree.isEmpty();
-        assert tree.size() == 6;
+        assert tree.size() == 7;
 
         assert tree.contains(new Point2D(0.5, 0.5));
         assert tree.contains(new Point2D(0.25, 0.4));
@@ -183,8 +206,8 @@ public class KdTree {
 
         tree.draw();
         Iterable<Point2D> range = tree.range(new RectHV(0.49, 0.49, 0.51, 0.51));
-        Point2D nearest = tree.nearest(new Point2D(0.06, 0.49));
-        assert nearest.x() == 0.25;
-        assert nearest.y() == 0.4;
+        Point2D nearest = tree.nearest(new Point2D(0.40, 0.85));
+        assert nearest.x() == 0.35;
+        assert nearest.y() == 0.85;
     }
 }
