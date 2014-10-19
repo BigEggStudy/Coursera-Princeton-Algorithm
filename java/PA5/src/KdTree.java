@@ -7,13 +7,11 @@ public class KdTree {
 
     private static class Node {
         private Point2D p;      // the point
-        private RectHV rect;    // the axis-aligned rectangle corresponding to this node
         private Node lb;        // the left/bottom subtree
         private Node rt;        // the right/top subtree
 
-        public Node(Point2D point, RectHV rectHV) {
+        public Node(Point2D point) {
             p = point;
-            rect = rectHV;
         }
     }
 
@@ -31,34 +29,26 @@ public class KdTree {
     }
 
     public void insert(Point2D p) {
-        root = insert(root, p, true, new RectHV(0, 0, 1, 1));
+        root = insert(root, p, true);
     }
 
-    private Node insert(Node rootNode, Point2D newPoint, boolean useX, RectHV rectHV) {
+    private Node insert(Node rootNode, Point2D newPoint, boolean useX) {
         if (rootNode == null) {
             N++;
-            return new Node(newPoint, rectHV);
+            return new Node(newPoint);
         }
 
         int cmp = comparePoint(rootNode.p, newPoint, useX);
-        final double xmin = rectHV.xmin();
-        final double xmax = rectHV.xmax();
-        final double ymin = rectHV.ymin();
-        final double ymax = rectHV.ymax();
         if (useX) {
             if (cmp < 0)
-                rootNode.lb = insert(rootNode.lb, newPoint, !useX,
-                        new RectHV(xmin, ymin, rootNode.p.x(), ymax));
+                rootNode.lb = insert(rootNode.lb, newPoint, !useX);
             else if (cmp > 0)
-                rootNode.rt = insert(rootNode.rt, newPoint, !useX,
-                        new RectHV(rootNode.p.x(), ymin, xmax, ymax));
+                rootNode.rt = insert(rootNode.rt, newPoint, !useX);
         } else {
             if (cmp < 0)
-                rootNode.lb = insert(rootNode.lb, newPoint, !useX,
-                        new RectHV(xmin, ymin, xmax, rootNode.p.y()));
+                rootNode.lb = insert(rootNode.lb, newPoint, !useX);
             else if (cmp > 0)
-                rootNode.rt = insert(rootNode.rt, newPoint, !useX,
-                        new RectHV(xmin, rootNode.p.y(), xmax, ymax));
+                rootNode.rt = insert(rootNode.rt, newPoint, !useX);
         }
         return rootNode;
     }
@@ -104,10 +94,10 @@ public class KdTree {
         StdDraw.setPenRadius();
         if (useX) {
             StdDraw.setPenColor(StdDraw.RED);
-            StdDraw.line(pointNode.p.x(), pointNode.rect.ymin(), pointNode.p.x(), pointNode.rect.ymax());
+            //    StdDraw.line(pointNode.p.x(), pointNode.rect.ymin(), pointNode.p.x(), pointNode.rect.ymax());
         } else {
             StdDraw.setPenColor(StdDraw.BLUE);
-            StdDraw.line(pointNode.rect.xmin(), pointNode.p.y(), pointNode.rect.xmax(), pointNode.p.y());
+            //    StdDraw.line(pointNode.rect.xmin(), pointNode.p.y(), pointNode.rect.xmax(), pointNode.p.y());
         }
 
         StdDraw.setPenColor(StdDraw.BLACK);
@@ -143,38 +133,47 @@ public class KdTree {
     public Point2D nearest(Point2D p) {
         if (isEmpty()) return null;
 
-        Nearest result = nearest(root, p, Double.POSITIVE_INFINITY, null);
-        return result.point2D;
+        Nearest nearest = new Nearest(null, Double.POSITIVE_INFINITY);
+        getNearest(root, p, true, nearest, new RectHV(0, 0, 1, 1));
+        return nearest.point;
     }
 
-    private Nearest nearest(Node pointNode, Point2D p, double distance, Point2D nearestPoint) {
-        if (pointNode == null) return new Nearest(nearestPoint, distance);
+    private void getNearest(Node pointNode, Point2D p, boolean useX, Nearest nearest, RectHV encompassingRect) {
+        if (pointNode == null) return;
 
         double newDistance = p.distanceSquaredTo(pointNode.p);
-        if (distance > newDistance) {
-            nearestPoint = pointNode.p;
-            distance = newDistance;
+        if (nearest.distance > newDistance) {
+            nearest.point = pointNode.p;
+            nearest.distance = newDistance;
         }
 
-        Nearest result = new Nearest(nearestPoint, distance);
-        if (pointNode.lb != null)
-            result = nearest(pointNode.lb, p, distance, nearestPoint);
-        if (result != null) {
-            nearestPoint = result.point2D;
-            distance = result.distance;
+        if (pointNode.lb != null) {
+            RectHV rect;
+            if (useX) {
+                rect = new RectHV(encompassingRect.xmin(), encompassingRect.ymin(), pointNode.p.x(), encompassingRect.ymax());
+            } else {
+                rect = new RectHV(encompassingRect.xmin(), encompassingRect.ymin(), encompassingRect.xmax(), pointNode.p.y());
+            }
+            getNearest(pointNode.lb, p, !useX, nearest, rect);
         }
-        if (pointNode.rt != null && pointNode.rt.rect.distanceSquaredTo(p) < distance)
-            result = nearest(pointNode.rt, p, distance, nearestPoint);
-
-        return result;
+        if (pointNode.rt != null) {
+            RectHV rect;
+            if (useX) {
+                rect = new RectHV(pointNode.p.x(), encompassingRect.ymin(), encompassingRect.xmax(), encompassingRect.ymax());
+            } else {
+                rect = new RectHV(encompassingRect.xmin(), pointNode.p.y(), encompassingRect.xmax(), encompassingRect.ymax());
+            }
+            if (rect.distanceSquaredTo(p) < nearest.distance)
+                getNearest(pointNode.rt, p, !useX, nearest, rect);
+        }
     }
 
     private class Nearest {
-        private Point2D point2D;
+        private Point2D point;
         private double distance;
 
         public Nearest(Point2D point2D, double distance) {
-            this.point2D = point2D;
+            this.point = point2D;
             this.distance = distance;
         }
     }
