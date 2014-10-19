@@ -34,7 +34,7 @@ public class KdTree {
         root = insert(root, p, true, new RectHV(0, 0, 1, 1));
     }
 
-    public Node insert(Node rootNode, Point2D newPoint, boolean useX, RectHV rectHV) {
+    private Node insert(Node rootNode, Point2D newPoint, boolean useX, RectHV rectHV) {
         if (rootNode == null) {
             N++;
             return new Node(newPoint, rectHV);
@@ -94,7 +94,7 @@ public class KdTree {
         drawPoint(root, true);
     }
 
-    public void drawPoint(Node pointNode, boolean useX) {
+    private void drawPoint(Node pointNode, boolean useX) {
         if (pointNode == null) return;
 
         StdDraw.setPenRadius();
@@ -120,7 +120,7 @@ public class KdTree {
         return result;
     }
 
-    public void range(Stack<Point2D> result, Node pointNode, RectHV rectHV, boolean useX) {
+    private void range(Stack<Point2D> result, Node pointNode, RectHV rectHV, boolean useX) {
         if (pointNode == null) return;
 
         Point2D point = pointNode.p;
@@ -140,7 +140,7 @@ public class KdTree {
         return nearest(root, p, Double.POSITIVE_INFINITY, null);
     }
 
-    public Point2D nearest(Node pointNode, Point2D p, double distance, Point2D nearestPoint) {
+    private Point2D nearest(Node pointNode, Point2D p, double distance, Point2D nearestPoint) {
         if (pointNode == null) return nearestPoint;
 
         double newDistance = p.distanceSquaredTo(pointNode.p);
@@ -149,7 +149,7 @@ public class KdTree {
             distance = newDistance;
         }
 
-        if (pointNode.lb != null && pointNode.lb.rect.contains(p))
+        if (pointNode.lb != null)
             nearestPoint = nearest(pointNode.lb, p, distance, nearestPoint);
         if (pointNode.rt != null && pointNode.rt.rect.distanceSquaredTo(p) < distance)
             nearestPoint = nearest(pointNode.rt, p, distance, nearestPoint);
