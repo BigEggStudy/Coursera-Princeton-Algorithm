@@ -94,9 +94,5 @@ public class PointSET {
         assert !set.contains(new Point2D(0.24, 0.75));
 
         set.draw();
-        Iterable<Point2D> range = set.range(new RectHV(0.49, 0.49, 0.51, 0.51));
-        Point2D nearest = set.nearest(new Point2D(0.49, 0.49));
-        assert nearest.x() == 0.5;
-        assert nearest.y() == 0.5;
     }
 }

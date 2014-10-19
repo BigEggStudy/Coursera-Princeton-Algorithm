@@ -169,7 +169,7 @@ public class KdTree {
         return result;
     }
 
-    public class Nearest {
+    private class Nearest {
         private Point2D point2D;
         private double distance;
 
@@ -205,9 +205,5 @@ public class KdTree {
         assert !tree.contains(new Point2D(0.24, 0.75));
 
         tree.draw();
-        Iterable<Point2D> range = tree.range(new RectHV(0.49, 0.49, 0.51, 0.51));
-        Point2D nearest = tree.nearest(new Point2D(0.40, 0.85));
-        assert nearest.x() == 0.35;
-        assert nearest.y() == 0.85;
     }
 }
