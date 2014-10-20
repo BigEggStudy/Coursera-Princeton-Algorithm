@@ -7,6 +7,7 @@ public class KdTree {
 
     private static class Node {
         private Point2D p;      // the point
+        private RectHV rect;
         private Node lb;        // the left/bottom subtree
         private Node rt;        // the right/top subtree
 
@@ -148,23 +149,25 @@ public class KdTree {
         }
 
         if (pointNode.lb != null) {
-            RectHV rect;
-            if (useX) {
-                rect = new RectHV(encompassingRect.xmin(), encompassingRect.ymin(), pointNode.p.x(), encompassingRect.ymax());
-            } else {
-                rect = new RectHV(encompassingRect.xmin(), encompassingRect.ymin(), encompassingRect.xmax(), pointNode.p.y());
+            if (pointNode.lb.rect == null) {
+                if (useX) {
+                    pointNode.lb.rect = new RectHV(encompassingRect.xmin(), encompassingRect.ymin(), pointNode.p.x(), encompassingRect.ymax());
+                } else {
+                    pointNode.lb.rect = new RectHV(encompassingRect.xmin(), encompassingRect.ymin(), encompassingRect.xmax(), pointNode.p.y());
+                }
             }
-            getNearest(pointNode.lb, p, !useX, nearest, rect);
+            getNearest(pointNode.lb, p, !useX, nearest, pointNode.lb.rect);
         }
         if (pointNode.rt != null) {
-            RectHV rect;
-            if (useX) {
-                rect = new RectHV(pointNode.p.x(), encompassingRect.ymin(), encompassingRect.xmax(), encompassingRect.ymax());
-            } else {
-                rect = new RectHV(encompassingRect.xmin(), pointNode.p.y(), encompassingRect.xmax(), encompassingRect.ymax());
+            if (pointNode.rt.rect == null) {
+                if (useX) {
+                    pointNode.rt.rect = new RectHV(pointNode.p.x(), encompassingRect.ymin(), encompassingRect.xmax(), encompassingRect.ymax());
+                } else {
+                    pointNode.rt.rect = new RectHV(encompassingRect.xmin(), pointNode.p.y(), encompassingRect.xmax(), encompassingRect.ymax());
+                }
             }
-            if (rect.distanceSquaredTo(p) < nearest.distance)
-                getNearest(pointNode.rt, p, !useX, nearest, rect);
+            if (pointNode.rt.rect.distanceSquaredTo(p) < nearest.distance)
+                getNearest(pointNode.rt, p, !useX, nearest, pointNode.rt.rect);
         }
     }
 
