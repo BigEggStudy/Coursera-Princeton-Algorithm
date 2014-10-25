@@ -8,4 +8,16 @@ public abstract class Sort implements ISort {
     public void sort(Comparable[] a) {
         sort(a, SortOrder.ASC);
     }
+
+    @Override
+    public void sort(Comparable[] a, SortOrder order) {
+        if (order == SortOrder.ASC)
+            sortASE(a);
+        else
+            sortDESC(a);
+    }
+
+    protected abstract void sortASE(Comparable[] a);
+
+    protected abstract void sortDESC(Comparable[] a);
 }

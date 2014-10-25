@@ -7,18 +7,29 @@ import static Sorts.SortHelper.*;
  */
 public class SelectionSort extends Sort {
     @Override
-    public void sort(Comparable[] a, SortOrder order) {
+    protected void sortASE(Comparable[] a) {
         int N = a.length;
         for (int i = 0; i < N; i++) {
-            int exchIndex = i;
+            int min = i;
             for (int j = i + 1; j < N; j++) {
-                if (order == SortOrder.ASC)
-                    if (less(a[j], a[exchIndex]))
-                        exchIndex = j;
-                    else if (greater(a[j], a[exchIndex]))
-                        exchIndex = j;
+                if (less(a[j], a[min]))
+                    min = j;
             }
-            exch(a, i, exchIndex);
+            exch(a, i, min);
         }
     }
+
+    @Override
+    protected void sortDESC(Comparable[] a) {
+        int N = a.length;
+        for (int i = 0; i < N; i++) {
+            int max = i;
+            for (int j = i + 1; j < N; j++) {
+                if (greater(a[j], a[max]))
+                    max = j;
+            }
+            exch(a, i, max);
+        }
+    }
+
 }
