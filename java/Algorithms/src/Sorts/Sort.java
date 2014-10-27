@@ -11,6 +11,8 @@ public abstract class Sort implements ISort {
 
     @Override
     public void sort(Comparable[] a, SortOrder order) {
+        if (a == null) throw new IllegalArgumentException();
+
         if (order == SortOrder.ASC)
             sortASE(a);
         else
