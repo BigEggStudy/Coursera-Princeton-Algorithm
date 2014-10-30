@@ -46,6 +46,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BinarySearch.cs" />
+    <Compile Include="Sorts\SortHelper.cs" />
+    <Compile Include="Sorts\SortOrder.cs" />
     <Compile Include="UnionFinds\QuickFindUF.cs" />
     <Compile Include="UnionFinds\IUnionFind.cs" />
     <Compile Include="UnionFinds\QuickUnionUF.cs" />
