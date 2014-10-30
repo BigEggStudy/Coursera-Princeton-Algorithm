@@ -51,10 +51,14 @@ public class SelectionSort {
     /**
      * Rearranges the array in specific order, using a comparator.
      *
-     * @param a the array
-     * @param c the comparator specifying the order
+     * @param a     the array
+     * @param c     the comparator specifying the order
+     * @param order the sort order
      */
     public static void sort(Object[] a, Comparator c, SortOrder order) {
+        if (a == null) throw new IllegalArgumentException();
+        if (c == null) throw new IllegalArgumentException();
+
         if (order == SortOrder.ASC)
             sortASC(a, c);
         else
@@ -92,6 +96,7 @@ public class SelectionSort {
                 if (less(c, a[j], a[min]))
                     min = j;
             }
+            exch(a, i, min);
         }
     }
 
@@ -121,11 +126,12 @@ public class SelectionSort {
     protected static void sortDESC(Object[] a, Comparator c) {
         int N = a.length;
         for (int i = 0; i < N; i++) {
-            int min = i;
+            int max = i;
             for (int j = i + 1; j < N; j++) {
-                if (greater(c, a[j], a[min]))
-                    min = j;
+                if (greater(c, a[j], a[max]))
+                    max = j;
             }
+            exch(a, i, max);
         }
     }
 }
