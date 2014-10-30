@@ -26,8 +26,8 @@ public class ShellSort {
     /**
      * Rearranges the array in ascending order, using a comparator.
      *
-     * @param a the array
-     * @param c the comparator specifying the order
+     * @param a the array to be sorted
+     * @param c the comparator that specifying the order
      */
     public static void sort(Object[] a, Comparator c) {
         sort(a, c, SortOrder.ASC);
@@ -52,7 +52,7 @@ public class ShellSort {
      * Rearranges the array in specific order, using a comparator.
      *
      * @param a     the array to be sorted
-     * @param c     the the comparator specifying the order
+     * @param c     the comparator that specifying the order
      * @param order the sort order
      */
     public static void sort(Object[] a, Comparator c, SortOrder order) {
@@ -90,7 +90,7 @@ public class ShellSort {
      * Rearranges the array in ascending order, using a comparator.
      *
      * @param a the array to be sorted
-     * @param c the comparator specifying the order
+     * @param c the comparator that specifying the order
      */
     protected static void sortASC(Object[] a, Comparator c) {
         int N = a.length;
@@ -133,7 +133,7 @@ public class ShellSort {
      * Rearranges the array in descending order, using a comparator.
      *
      * @param a the array to be sorted
-     * @param c the comparator specifying the order
+     * @param c the comparator that specifying the order
      */
     protected static void sortDESC(Object[] a, Comparator c) {
         int N = a.length;
