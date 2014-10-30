@@ -22,7 +22,7 @@ public class ShellSort {
     }
 
     /**
-     * Rearranges the array in ascending order
+     * Rearranges the array in specific order, using the natural order.
      *
      * @param a     the array to be sorted
      * @param order the sort order
@@ -37,7 +37,7 @@ public class ShellSort {
     }
 
     /**
-     * Rearranges the array in ascending order, using the ASC order.
+     * Rearranges the array in ascending order, using the natural order.
      *
      * @param a the array to be sorted
      */
@@ -58,7 +58,7 @@ public class ShellSort {
     }
 
     /**
-     * Rearranges the array in ascending order, using the DESC order.
+     * Rearranges the array in descending order, using the natural order.
      *
      * @param a the array to be sorted
      */
