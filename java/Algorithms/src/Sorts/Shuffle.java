@@ -1,23 +1,28 @@
 package Sorts;
 
-import java.util.Random;
-
 import static Sorts.SortHelper.exch;
 
 /**
  * Created by jianming.xiao on 10/25/14.
  */
 public final class Shuffle {
-    private static Random random;
-
-    static {
-        random.setSeed(System.currentTimeMillis());
+    /**
+     * This class should not be instantiated
+     */
+    private Shuffle() {
     }
 
-    public static void shuffle(Comparable[] a) {
+    /**
+     * Rearranges an array of objects in uniformly random order
+     * (under the assumption that <tt>Math.random()</tt> generates independent
+     * and uniformly distributed numbers between 0 and 1).
+     *
+     * @param a the array to be shuffled
+     */
+    public static void shuffle(Object[] a) {
         int N = a.length;
         for (int i = 0; i < N; i++) {
-            int r = random.nextInt(i + 1);
+            int r = (int) (Math.random() * (i + 1));
             exch(a, i, r);
         }
     }
