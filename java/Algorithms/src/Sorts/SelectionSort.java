@@ -24,6 +24,16 @@ public class SelectionSort {
     }
 
     /**
+     * Rearranges the array in ascending order, using a comparator.
+     *
+     * @param a the array
+     * @param c the comparator specifying the order
+     */
+    public static void sort(Object[] a, Comparator c) {
+        sort(a, c, SortOrder.ASC);
+    }
+
+    /**
      * Rearranges the array in specific order, using the natural order.
      *
      * @param a     the array to be sorted
@@ -36,16 +46,6 @@ public class SelectionSort {
             sortASC(a);
         else
             sortDESC(a);
-    }
-
-    /**
-     * Rearranges the array in ascending order, using a comparator.
-     *
-     * @param a the array
-     * @param c the comparator specifying the order
-     */
-    public static void sort(Object[] a, Comparator c) {
-        sort(a, c, SortOrder.ASC);
     }
 
     /**

@@ -24,17 +24,34 @@ public class SelectionSortTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSortWithComparator_NullArray() throws Exception {
-        SelectionSort.sort(null);
+        SelectionSort.sort(null, Point.X_ORDER);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSortWithComparator_NullComparator() throws Exception {
+        Point[] points = new Point[10];
+        for (int i = 0; i < 10; i++) {
+            points[i] = new Point(i, 10 - i);
+        }
+        SelectionSort.sort(points, null, SortOrder.ASC);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSortWithComparator_ASCOrder_NullArray() throws Exception {
-        SelectionSort.sort(null, SortOrder.ASC);
+        Point[] points = new Point[10];
+        for (int i = 0; i < 10; i++) {
+            points[i] = new Point(i, 10 - i);
+        }
+        SelectionSort.sort(points, null, SortOrder.ASC);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSortWithComparator_DESCOrder_NullArray() throws Exception {
-        SelectionSort.sort(null, SortOrder.DESC);
+        Point[] points = new Point[10];
+        for (int i = 0; i < 10; i++) {
+            points[i] = new Point(i, 10 - i);
+        }
+        SelectionSort.sort(points, null, SortOrder.DESC);
     }
 
     @Test
