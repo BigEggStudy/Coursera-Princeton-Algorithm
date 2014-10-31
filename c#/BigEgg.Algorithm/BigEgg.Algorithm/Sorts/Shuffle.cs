@@ -4,14 +4,13 @@ namespace BigEgg.Algorithm.Sorts
 {
     public class Shuffle
     {
-
         /// <summary>
         /// Rearranges an array of objects in uniformly random order
         /// (under the assumption that <tt>Math.random()</tt> generates independent
         /// and uniformly distributed numbers between 0 and 1).
         /// </summary>
         /// <param name="a">the array to be shuffled</param>
-        public static void Shuffle(Object[] a)
+        public static void Do(Object[] a)
         {
             var random = new Random(DateTime.Now.Millisecond);
 
