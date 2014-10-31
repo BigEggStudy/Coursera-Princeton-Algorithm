@@ -87,12 +87,12 @@ namespace BigEgg.Algorithm.Sorts
         {
             if (order == SortOrder.ASC)
             {
-                for (int i = lo + 1; i <= hi; i++)
+                for (int i = lo + 1; i < hi; i++)
                     if (Less(a[i], a[i - 1])) return false;
             }
             else
             {
-                for (int i = lo + 1; i <= hi; i++)
+                for (int i = lo + 1; i < hi; i++)
                     if (Greater(a[i], a[i - 1])) return false;
             }
             return true;
@@ -134,12 +134,12 @@ namespace BigEgg.Algorithm.Sorts
         {
             if (order == SortOrder.ASC)
             {
-                for (int i = lo + 1; i <= hi; i++)
+                for (int i = lo + 1; i < hi; i++)
                     if (Less(c, a[i], a[i - 1])) return false;
             }
             else
             {
-                for (int i = lo + 1; i <= hi; i++)
+                for (int i = lo + 1; i < hi; i++)
                     if (Greater(c, a[i], a[i - 1])) return false;
             }
             return true;
