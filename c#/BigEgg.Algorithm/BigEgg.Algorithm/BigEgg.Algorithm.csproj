@@ -48,6 +48,7 @@
     <Compile Include="BinarySearch.cs" />
     <Compile Include="Sorts\InsertionSort.cs" />
     <Compile Include="Sorts\SelectionSort.cs" />
+    <Compile Include="Sorts\ShellSort.cs" />
     <Compile Include="Sorts\SortHelper.cs" />
     <Compile Include="Sorts\SortOrder.cs" />
     <Compile Include="UnionFinds\QuickFindUF.cs" />
