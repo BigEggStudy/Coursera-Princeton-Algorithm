@@ -9,7 +9,7 @@ namespace BigEgg.Algorithm.Sorts
         /// Rearranges the array in ascending order, using the natural order.
         /// </summary>
         /// <param name="a">The array to be sorted</param>
-        public void Sort(IComparable[] a)
+        public static void Sort(IComparable[] a)
         {
             Sort(a, SortOrder.ASC);
         }
@@ -19,7 +19,7 @@ namespace BigEgg.Algorithm.Sorts
         /// </summary>
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparator that specifying the order</param>
-        public void Sort(Object[] a, IComparer c)
+        public static void Sort(Object[] a, IComparer c)
         {
             Sort(a, c, SortOrder.ASC);
         }
@@ -29,7 +29,7 @@ namespace BigEgg.Algorithm.Sorts
         /// </summary>
         /// <param name="a">The array to be sorted</param>
         /// <param name="order">The sort order.</param>
-        public void Sort(IComparable[] a, SortOrder order)
+        public static void Sort(IComparable[] a, SortOrder order)
         {
             if (a == null) { throw new ArgumentNullException("a"); }
 
@@ -45,7 +45,7 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparator that specifying the order</param>
         /// <param name="order">The sort order.</param>
-        public void Sort(Object[] a, IComparer c, SortOrder order)
+        public static void Sort(Object[] a, IComparer c, SortOrder order)
         {
             if (a == null) { throw new ArgumentNullException("a"); }
             if (c == null) { throw new ArgumentNullException("c"); }
@@ -60,7 +60,7 @@ namespace BigEgg.Algorithm.Sorts
         /// Rearranges the array in ascending order, using the natural order.
         /// </summary>
         /// <param name="a">The array to be sorted</param>
-        protected void SortASC(IComparable[] a)
+        protected static void SortASC(IComparable[] a)
         {
             int N = a.Length;
 
@@ -79,7 +79,7 @@ namespace BigEgg.Algorithm.Sorts
         /// </summary>
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparator that specifying the order</param>
-        protected void SortASC(Object[] a, IComparer c)
+        protected static void SortASC(Object[] a, IComparer c)
         {
             int N = a.Length;
 
@@ -97,7 +97,7 @@ namespace BigEgg.Algorithm.Sorts
         /// Rearranges the array in descending order, using the natural order.
         /// </summary>
         /// <param name="a">The array to be sorted</param>
-        protected void SortDESC(IComparable[] a)
+        protected static void SortDESC(IComparable[] a)
         {
             int N = a.Length;
 
@@ -116,7 +116,7 @@ namespace BigEgg.Algorithm.Sorts
         /// </summary>
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparator that specifying the order</param>
-        protected void SortDESC(Object[] a, IComparer c)
+        protected static void SortDESC(Object[] a, IComparer c)
         {
             int N = a.Length;
 
