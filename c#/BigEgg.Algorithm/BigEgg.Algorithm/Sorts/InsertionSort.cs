@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace BigEgg.Algorithm.Sorts
 {
-    public static class SelectionSort
+    public class InsertionSort
     {
         /// <summary>
         /// Rearranges the array in ascending order, using the natural order.
@@ -63,34 +63,22 @@ namespace BigEgg.Algorithm.Sorts
         protected static void SortASC(IComparable[] a)
         {
             int N = a.Length;
-
             for (int i = 0; i < N; i++)
-            {
-                int min = i;
-                for (int j = i + 1; j < N; j++)
-                    if (SortHelper.Less(a[j], a[min]))
-                        min = j;
-                SortHelper.Exchange(a, min, i);
-            }
+                for (int j = i; j > 0 && SortHelper.Less(a[j], a[j - 1]); j--)
+                    SortHelper.Exchange(a, j, j - 1);
         }
 
         /// <summary>
         /// Rearranges the array in ascending order, using a comparer.
         /// </summary>
         /// <param name="a">The array to be sorted</param>
-        /// <param name="c">the comparer that specifying the order</param>
+        /// <param name="c">The comparer that specifying the order</param>
         protected static void SortASC(Object[] a, IComparer c)
         {
             int N = a.Length;
-
             for (int i = 0; i < N; i++)
-            {
-                int min = i;
-                for (int j = i + 1; j < N; j++)
-                    if (SortHelper.Less(c, a[j], a[min]))
-                        min = j;
-                SortHelper.Exchange(a, i, min);
-            }
+                for (int j = i; j > 0 && SortHelper.Less(c, a[j], a[j - 1]); j--)
+                    SortHelper.Exchange(a, j, j - 1);
         }
 
         /// <summary>
@@ -100,34 +88,22 @@ namespace BigEgg.Algorithm.Sorts
         protected static void SortDESC(IComparable[] a)
         {
             int N = a.Length;
-
             for (int i = 0; i < N; i++)
-            {
-                int max = i;
-                for (int j = i + 1; j < N; j++)
-                    if (SortHelper.Greater(a[j], a[max]))
-                        max = j;
-                SortHelper.Exchange(a, max, i);
-            }
+                for (int j = i; j > 0 && SortHelper.Greater(a[j], a[j - 1]); j--)
+                    SortHelper.Exchange(a, j, j - 1);
         }
 
         /// <summary>
         /// Rearranges the array in descending order, using a comparer.
         /// </summary>
         /// <param name="a">The array to be sorted</param>
-        /// <param name="c">the comparer that specifying the order</param>
+        /// <param name="c">The comparer that specifying the order</param>
         protected static void SortDESC(Object[] a, IComparer c)
         {
             int N = a.Length;
-
             for (int i = 0; i < N; i++)
-            {
-                int max = i;
-                for (int j = i + 1; j < N; j++)
-                    if (SortHelper.Greater(c, a[j], a[max]))
-                        max = j;
-                SortHelper.Exchange(a, i, max);
-            }
+                for (int j = i; j > 0 && SortHelper.Greater(c, a[j], a[j - 1]); j--)
+                    SortHelper.Exchange(a, j, j - 1);
         }
     }
 }
