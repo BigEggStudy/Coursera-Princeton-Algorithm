@@ -38,6 +38,11 @@ public class InsertionSortTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSortWithComparator_ASCOrder_NullArray() throws Exception {
+        InsertionSort.sort(null, Point.X_ORDER, SortOrder.ASC);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSortWithComparator_ASCOrder_NullComparator() throws Exception {
         Point[] points = new Point[10];
         for (int i = 0; i < 10; i++) {
             points[i] = new Point(i, 10 - i);
@@ -47,6 +52,11 @@ public class InsertionSortTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSortWithComparator_DESCOrder_NullArray() throws Exception {
+        InsertionSort.sort(null, Point.X_ORDER, SortOrder.DESC);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSortWithComparator_DESCOrder_NullComparator() throws Exception {
         Point[] points = new Point[10];
         for (int i = 0; i < 10; i++) {
             points[i] = new Point(i, 10 - i);
