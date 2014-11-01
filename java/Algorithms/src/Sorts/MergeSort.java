@@ -9,6 +9,8 @@ import static Sorts.SortHelper.less;
  * Created by jianming.xiao on 11/1/14.
  */
 public class MergeSort {
+    private static final int CUT_OFF = 7;
+
     /**
      * This class should not be instantiated.
      */
@@ -73,11 +75,17 @@ public class MergeSort {
     }
 
     protected static void sortASC(Comparable[] a, Comparable[] aux, int lo, int hi) {
+        if (hi <= lo + CUT_OFF - 1) {
+            //   InsertionSort.sort(a, lo, hi, SortOrder.ASC);
+        }
+
         if (hi <= lo) return;
         int mid = lo + (hi - lo) / 2;
         sortASC(a, aux, lo, mid);
         sortASC(a, aux, mid + 1, hi);
-        mergeASC(a, aux, lo, mid, hi);
+        if (less(a[mid + 1], a[mid])) {
+            mergeASC(a, aux, lo, mid, hi);
+        }
     }
 
     protected static void mergeASC(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
