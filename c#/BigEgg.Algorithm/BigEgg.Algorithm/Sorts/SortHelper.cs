@@ -104,9 +104,9 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="a">The array</param>
         /// <param name="c">The comparer.</param>        
         /// <returns><c>True</c> if array is sorted, otherwise <c>false</c>.</returns>
-        public static bool IsSorted(IComparable[] a, IComparer c)
+        public static bool IsSorted(Object[] a, IComparer c)
         {
-            return IsSorted(a, SortOrder.ASC);
+            return IsSorted(a, c, SortOrder.ASC);
         }
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="c">The comparer.</param>
         /// <param name="order">The sort order</param>
         /// <returns><c>True</c> if array is sorted, otherwise <c>false</c>.</returns>
-        public static bool IsSorted(IComparable[] a, IComparer c, SortOrder order)
+        public static bool IsSorted(Object[] a, IComparer c, SortOrder order)
         {
-            return IsSorted(a, 0, a.Length, order);
+            return IsSorted(a, c, 0, a.Length, order);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="hi">The high index</param>
         /// <param name="order">The sort order</param>
         /// <returns><c>True</c> if array is sorted, otherwise <c>false</c>.</returns>
-        public static bool IsSorted(IComparable[] a, IComparer c, int lo, int hi, SortOrder order)
+        public static bool IsSorted(Object[] a, IComparer c, int lo, int hi, SortOrder order)
         {
             if (order == SortOrder.ASC)
             {
