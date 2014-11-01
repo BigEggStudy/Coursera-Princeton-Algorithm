@@ -72,7 +72,7 @@ public class SortHelper {
     }
 
     /**
-     * Check if array is sorted, using the natural order.
+     * Check if array is sorted in ascending order, using the natural order.
      *
      * @param a the array
      * @return true if array is sorted, otherwise false.
@@ -82,7 +82,7 @@ public class SortHelper {
     }
 
     /**
-     * Check if array is sorted
+     * Check if array is sorted in specific order, using the natural order.
      *
      * @param a     the array
      * @param order The sort order
@@ -93,7 +93,7 @@ public class SortHelper {
     }
 
     /**
-     * Is the array sorted from a[lo] to a[hi]
+     * Is the array sorted in specific order from a[lo] to a[hi], using the natural order.
      *
      * @param a     the array
      * @param lo    the low index
@@ -113,7 +113,7 @@ public class SortHelper {
     }
 
     /**
-     * Check if array is sorted, using the natural order.
+     * Check if array is sorted in ascending order, using a comparator.
      *
      * @param a the array
      * @param c the comparator
@@ -124,7 +124,7 @@ public class SortHelper {
     }
 
     /**
-     * Check if array is sorted
+     * Check if array is sorted in specific order, using a comparator.
      *
      * @param a     the array
      * @param c     the comparator
@@ -136,7 +136,7 @@ public class SortHelper {
     }
 
     /**
-     * Is the array sorted from a[lo] to a[hi]
+     * Is the array sorted in specific order from a[lo] to a[hi], using a comparator.
      *
      * @param a     the array
      * @param c     the comparator
