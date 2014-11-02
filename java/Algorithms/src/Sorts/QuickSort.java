@@ -78,7 +78,7 @@ public class QuickSort {
         while (true) {
             while (less(a[++i], v))
                 if (i == hi) break;
-            while (less(v, a[++j]))
+            while (less(v, a[--j]))
                 if (j == lo) break;
             if (i >= j) break;
             ;
@@ -106,7 +106,7 @@ public class QuickSort {
         while (true) {
             while (greater(a[++i], v))
                 if (i == hi) break;
-            while (greater(v, a[++j]))
+            while (greater(v, a[--j]))
                 if (j == lo) break;
             if (i >= j) break;
             ;
@@ -134,7 +134,7 @@ public class QuickSort {
         while (true) {
             while (less(c, a[++i], v))
                 if (i == hi) break;
-            while (less(c, v, a[++j]))
+            while (less(c, v, a[--j]))
                 if (j == lo) break;
             if (i >= j) break;
             ;
@@ -162,7 +162,7 @@ public class QuickSort {
         while (true) {
             while (greater(c, a[++i], v))
                 if (i == hi) break;
-            while (greater(c, v, a[++j]))
+            while (greater(c, v, a[--j]))
                 if (j == lo) break;
             if (i >= j) break;
             ;
