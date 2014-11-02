@@ -58,6 +58,7 @@
     <Compile Include="Collections\ResizingArrayQueueTest.cs" />
     <Compile Include="Collections\ResizingArrayStackTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sorts\QuickSortTest.cs" />
     <Compile Include="Sorts\MergeSortTest.cs" />
     <Compile Include="Sorts\BUMergeSortTest.cs" />
     <Compile Include="Sorts\Point.cs" />
