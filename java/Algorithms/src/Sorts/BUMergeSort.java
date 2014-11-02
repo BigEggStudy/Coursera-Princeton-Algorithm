@@ -115,9 +115,9 @@ public class BUMergeSort {
         }
     }
 
-    protected static void sortASC(Comparable[] a, Comparator c) {
+    protected static void sortASC(Object[] a, Comparator c) {
         int N = a.length;
-        Comparable[] aux = new Comparable[N];
+        Object[] aux = new Object[N];
         for (int sz = 1; sz < N; sz = sz + sz) {
             for (int lo = 0; lo < N - sz; lo += sz + sz) {
                 mergeASC(a, aux, c, lo, lo + sz - 1, Math.min(lo + sz + sz - 1, N - 1));
@@ -125,7 +125,7 @@ public class BUMergeSort {
         }
     }
 
-    protected static void mergeASC(Comparable[] a, Comparable[] aux, Comparator c, int lo, int mid, int hi) {
+    protected static void mergeASC(Object[] a, Object[] aux, Comparator c, int lo, int mid, int hi) {
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
@@ -139,9 +139,9 @@ public class BUMergeSort {
         }
     }
 
-    protected static void sortDESC(Comparable[] a, Comparator c) {
+    protected static void sortDESC(Object[] a, Comparator c) {
         int N = a.length;
-        Comparable[] aux = new Comparable[N];
+        Object[] aux = new Object[N];
         for (int sz = 1; sz < N; sz = sz + sz) {
             for (int lo = 0; lo < N - sz; lo += sz + sz) {
                 mergeASC(a, aux, c, lo, lo + sz - 1, Math.min(lo + sz + sz - 1, N - 1));
@@ -149,7 +149,7 @@ public class BUMergeSort {
         }
     }
 
-    protected static void mergeDESC(Comparable[] a, Comparable[] aux, Comparator c, int lo, int mid, int hi) {
+    protected static void mergeDESC(Object[] a, Object[] aux, Comparator c, int lo, int mid, int hi) {
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
@@ -162,4 +162,6 @@ public class BUMergeSort {
             else a[k] = aux[i++];
         }
     }
+
+
 }
