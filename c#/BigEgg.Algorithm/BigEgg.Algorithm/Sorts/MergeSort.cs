@@ -73,7 +73,7 @@ namespace BigEgg.Algorithm.Sorts
 
         private static void MergeASC(IComparable[] a, IComparable[] aux, int lo, int mid, int hi)
         {
-            if (SortHelper.Less(a[mid + 1], a[mid])) return;
+            if (!SortHelper.Less(a[mid + 1], a[mid])) return;
 
             for (int k = lo; k <= hi; k++)
                 aux[k] = a[k];
@@ -105,7 +105,7 @@ namespace BigEgg.Algorithm.Sorts
 
         private static void MergeDESC(IComparable[] a, IComparable[] aux, int lo, int mid, int hi)
         {
-            if (SortHelper.Greater(a[mid + 1], a[mid])) return;
+            if (!SortHelper.Greater(a[mid + 1], a[mid])) return;
 
             for (int k = lo; k <= hi; k++)
                 aux[k] = a[k];
@@ -137,7 +137,7 @@ namespace BigEgg.Algorithm.Sorts
 
         private static void MergeASC(Object[] a, Object[] aux, IComparer c, int lo, int mid, int hi)
         {
-            if (SortHelper.Less(c, a[mid + 1], a[mid])) return;
+            if (!SortHelper.Less(c, a[mid + 1], a[mid])) return;
 
             for (int k = lo; k <= hi; k++)
                 aux[k] = a[k];
@@ -169,7 +169,7 @@ namespace BigEgg.Algorithm.Sorts
 
         private static void MergeDESC(Object[] a, Object[] aux, IComparer c, int lo, int mid, int hi)
         {
-            if (SortHelper.Greater(c, a[mid + 1], a[mid])) return;
+            if (!SortHelper.Greater(c, a[mid + 1], a[mid])) return;
 
             for (int k = lo; k <= hi; k++)
                 aux[k] = a[k];
