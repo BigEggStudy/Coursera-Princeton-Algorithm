@@ -25,7 +25,7 @@ namespace BigEgg.Algorithm
                 int j = Partition(a, lo, hi);
                 if (j < k) lo = j + 1;
                 else if (j > k) hi = j - 1;
-                return a[j];
+                else return a[j];
             }
         }
 
@@ -41,6 +41,7 @@ namespace BigEgg.Algorithm
         public static Object Select(Object[] a, IComparer c, int k)
         {
             if (a == null) { throw new ArgumentNullException(); }
+            if (c == null) { throw new ArgumentNullException(); }
             if (k < 0 || k >= a.Length) { throw new ArgumentException(); }
 
             int lo = 0, hi = a.Length - 1;
@@ -49,7 +50,7 @@ namespace BigEgg.Algorithm
                 int j = Partition(a, c, lo, hi);
                 if (j < k) lo = j + 1;
                 else if (j > k) hi = j - 1;
-                return a[j];
+                else return a[j];
             }
         }
 
