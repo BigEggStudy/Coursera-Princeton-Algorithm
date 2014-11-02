@@ -15,8 +15,8 @@ namespace BigEgg.Algorithm.Test.Sorts
             Y = y;
         }
 
-        public int X { private get; set; }
-        public int Y { private get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
         public int CompareTo(Point that)
         {
