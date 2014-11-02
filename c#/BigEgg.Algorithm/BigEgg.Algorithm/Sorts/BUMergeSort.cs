@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace BigEgg.Algorithm.Sorts
 {
-    public class BUMergeSort
+    public static class BUMergeSort
     {
         /// <summary>
         /// Rearranges the array in ascending order, using the natural order.
@@ -56,7 +56,7 @@ namespace BigEgg.Algorithm.Sorts
                 SortDESC(a, c);
         }
 
-        protected static void SortASC(IComparable[] a)
+        private static void SortASC(IComparable[] a)
         {
             int N = a.Length;
             IComparable[] aux = new IComparable[N];
@@ -82,7 +82,7 @@ namespace BigEgg.Algorithm.Sorts
             }
         }
 
-        protected static void SortDESC(IComparable[] a)
+        private static void SortDESC(IComparable[] a)
         {
             int N = a.Length;
             IComparable[] aux = new IComparable[N];
@@ -109,7 +109,7 @@ namespace BigEgg.Algorithm.Sorts
         }
 
 
-        protected static void SortASC(Object[] a, IComparer c)
+        private static void SortASC(Object[] a, IComparer c)
         {
             int N = a.Length;
             Object[] aux = new Object[N];
@@ -135,7 +135,7 @@ namespace BigEgg.Algorithm.Sorts
             }
         }
 
-        protected static void SortDESC(Object[] a, IComparer c)
+        private static void SortDESC(Object[] a, IComparer c)
         {
             int N = a.Length;
             Object[] aux = new Object[N];
