@@ -59,12 +59,12 @@ namespace BigEgg.Algorithm.Sorts
         protected static void SortASC(IComparable[] a)
         {
             IComparable[] aux = new IComparable[a.Length];
-            SortASC(a, aux, 0, a.Length);
+            SortASC(a, aux, 0, a.Length - 1);
         }
 
         private static void SortASC(IComparable[] a, IComparable[] aux, int lo, int hi)
         {
-            if (hi >= lo) return;
+            if (hi <= lo) return;
             int mid = lo + (hi - lo) / 2;
             SortASC(a, aux, lo, mid);
             SortASC(a, aux, mid + 1, hi);
@@ -83,7 +83,7 @@ namespace BigEgg.Algorithm.Sorts
             {
                 if (i > mid) a[k] = aux[j++];
                 else if (j > hi) a[k] = aux[i++];
-                else if (SortHelper.Less(a[j], a[i])) a[k] = aux[j++];
+                else if (SortHelper.Less(aux[j], aux[i])) a[k] = aux[j++];
                 else a[k] = aux[i++];
             }
         }
@@ -91,12 +91,12 @@ namespace BigEgg.Algorithm.Sorts
         protected static void SortDESC(IComparable[] a)
         {
             IComparable[] aux = new IComparable[a.Length];
-            SortDESC(a, aux, 0, a.Length);
+            SortDESC(a, aux, 0, a.Length - 1);
         }
 
         private static void SortDESC(IComparable[] a, IComparable[] aux, int lo, int hi)
         {
-            if (hi >= lo) return;
+            if (hi <= lo) return;
             int mid = lo + (hi - lo) / 2;
             SortDESC(a, aux, lo, mid);
             SortDESC(a, aux, mid + 1, hi);
@@ -115,7 +115,7 @@ namespace BigEgg.Algorithm.Sorts
             {
                 if (i > mid) a[k] = aux[j++];
                 else if (j > hi) a[k] = aux[i++];
-                else if (SortHelper.Greater(a[j], a[i])) a[k] = aux[j++];
+                else if (SortHelper.Greater(aux[j], aux[i])) a[k] = aux[j++];
                 else a[k] = aux[i++];
             }
         }
@@ -123,12 +123,12 @@ namespace BigEgg.Algorithm.Sorts
         protected static void SortASC(Object[] a, IComparer c)
         {
             Object[] aux = new Object[a.Length];
-            SortASC(a, aux, c, 0, a.Length);
+            SortASC(a, aux, c, 0, a.Length - 1);
         }
 
         private static void SortASC(Object[] a, Object[] aux, IComparer c, int lo, int hi)
         {
-            if (hi >= lo) return;
+            if (hi <= lo) return;
             int mid = lo + (hi - lo) / 2;
             SortASC(a, aux, c, lo, mid);
             SortASC(a, aux, c, mid + 1, hi);
@@ -147,7 +147,7 @@ namespace BigEgg.Algorithm.Sorts
             {
                 if (i > mid) a[k] = aux[j++];
                 else if (j > hi) a[k] = aux[i++];
-                else if (SortHelper.Less(c, a[j], a[i])) a[k] = aux[j++];
+                else if (SortHelper.Less(c, aux[j], aux[i])) a[k] = aux[j++];
                 else a[k] = aux[i++];
             }
         }
@@ -155,12 +155,12 @@ namespace BigEgg.Algorithm.Sorts
         protected static void SortDESC(Object[] a, IComparer c)
         {
             Object[] aux = new Object[a.Length];
-            SortDESC(a, aux, c, 0, a.Length);
+            SortDESC(a, aux, c, 0, a.Length - 1);
         }
 
         private static void SortDESC(Object[] a, Object[] aux, IComparer c, int lo, int hi)
         {
-            if (hi >= lo) return;
+            if (hi <= lo) return;
             int mid = lo + (hi - lo) / 2;
             SortDESC(a, aux, c, lo, mid);
             SortDESC(a, aux, c, mid + 1, hi);
@@ -179,7 +179,7 @@ namespace BigEgg.Algorithm.Sorts
             {
                 if (i > mid) a[k] = aux[j++];
                 else if (j > hi) a[k] = aux[i++];
-                else if (SortHelper.Greater(c, a[j], a[i])) a[k] = aux[j++];
+                else if (SortHelper.Greater(c, aux[j], aux[i])) a[k] = aux[j++];
                 else a[k] = aux[i++];
             }
         }

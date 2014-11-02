@@ -75,10 +75,10 @@ namespace BigEgg.Algorithm.Sorts
             int i = lo, j = mid + 1;
             for (int k = lo; k <= hi; k++)
             {
-                if (i > mid) a[k] = a[j++];
-                else if (j > hi) a[k] = a[i++];
-                else if (SortHelper.Less(a[j], a[i])) a[k] = a[j++];
-                else a[k] = a[i++];
+                if (i > mid) a[k] = aux[j++];
+                else if (j > hi) a[k] = aux[i++];
+                else if (SortHelper.Less(aux[j], aux[i])) a[k] = aux[j++];
+                else a[k] = aux[i++];
             }
         }
 
@@ -101,10 +101,10 @@ namespace BigEgg.Algorithm.Sorts
             int i = lo, j = mid + 1;
             for (int k = lo; k <= hi; k++)
             {
-                if (i > mid) a[k] = a[j++];
-                else if (j > hi) a[k] = a[i++];
-                else if (SortHelper.Greater(a[j], a[i])) a[k] = a[j++];
-                else a[k] = a[i++];
+                if (i > mid) a[k] = aux[j++];
+                else if (j > hi) a[k] = aux[i++];
+                else if (SortHelper.Greater(aux[j], aux[i])) a[k] = aux[j++];
+                else a[k] = aux[i++];
             }
         }
 
@@ -128,10 +128,10 @@ namespace BigEgg.Algorithm.Sorts
             int i = lo, j = mid + 1;
             for (int k = lo; k <= hi; k++)
             {
-                if (i > mid) a[k] = a[j++];
-                else if (j > hi) a[k] = a[i++];
-                else if (SortHelper.Less(c, a[j], a[i])) a[k] = a[j++];
-                else a[k] = a[i++];
+                if (i > mid) a[k] = aux[j++];
+                else if (j > hi) a[k] = aux[i++];
+                else if (SortHelper.Less(c, aux[j], aux[i])) a[k] = aux[j++];
+                else a[k] = aux[i++];
             }
         }
 
@@ -154,10 +154,10 @@ namespace BigEgg.Algorithm.Sorts
             int i = lo, j = mid + 1;
             for (int k = lo; k <= hi; k++)
             {
-                if (i > mid) a[k] = a[j++];
-                else if (j > hi) a[k] = a[i++];
-                else if (SortHelper.Greater(c, a[j], a[i])) a[k] = a[j++];
-                else a[k] = a[i++];
+                if (i > mid) a[k] = aux[j++];
+                else if (j > hi) a[k] = aux[i++];
+                else if (SortHelper.Greater(c, aux[j], aux[i])) a[k] = aux[j++];
+                else a[k] = aux[i++];
             }
         }
     }
