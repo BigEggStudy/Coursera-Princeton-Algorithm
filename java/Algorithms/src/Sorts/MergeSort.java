@@ -83,12 +83,12 @@ public class MergeSort {
         int mid = lo + (hi - lo) / 2;
         sortASC(a, aux, lo, mid);
         sortASC(a, aux, mid + 1, hi);
-        if (less(a[mid + 1], a[mid])) {
-            mergeASC(a, aux, lo, mid, hi);
-        }
+        mergeASC(a, aux, lo, mid, hi);
     }
 
     protected static void mergeASC(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+        if (!less(a[mid + 1], a[mid])) return;
+
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
@@ -97,7 +97,7 @@ public class MergeSort {
         for (int k = lo; k <= hi; k++) {
             if (i > mid) a[k] = aux[j++];
             else if (j > hi) a[k] = aux[i++];
-            else if (less(a[j], a[i])) a[k] = aux[j++];
+            else if (less(aux[j], aux[i])) a[k] = aux[j++];
             else a[k] = aux[i++];
         }
     }
@@ -116,6 +116,8 @@ public class MergeSort {
     }
 
     protected static void mergeDESC(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+        if (!greater(a[mid + 1], a[mid])) return;
+
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
@@ -124,7 +126,7 @@ public class MergeSort {
         for (int k = lo; k <= hi; k++) {
             if (i > mid) a[k] = aux[j++];
             else if (j > hi) a[k] = aux[i++];
-            else if (greater(a[j], a[i])) a[k] = aux[j++];
+            else if (greater(aux[j], aux[i])) a[k] = aux[j++];
             else a[k] = aux[i++];
         }
     }
@@ -143,6 +145,8 @@ public class MergeSort {
     }
 
     protected static void mergeASC(Object[] a, Object[] aux, Comparator c, int lo, int mid, int hi) {
+        if (!less(c, a[mid + 1], a[mid])) return;
+
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
@@ -151,7 +155,7 @@ public class MergeSort {
         for (int k = lo; k <= hi; k++) {
             if (i > mid) a[k] = aux[j++];
             else if (j > hi) a[k] = aux[i++];
-            else if (less(c, a[j], a[i])) a[k] = aux[j++];
+            else if (less(c, aux[j], aux[i])) a[k] = aux[j++];
             else a[k] = aux[i++];
         }
     }
@@ -170,6 +174,8 @@ public class MergeSort {
     }
 
     protected static void mergeDESC(Object[] a, Object[] aux, Comparator c, int lo, int mid, int hi) {
+        if (!greater(c, a[mid + 1], a[mid])) return;
+
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
@@ -178,7 +184,7 @@ public class MergeSort {
         for (int k = lo; k <= hi; k++) {
             if (i > mid) a[k] = aux[j++];
             else if (j > hi) a[k] = aux[i++];
-            else if (greater(c, a[j], a[i])) a[k] = aux[j++];
+            else if (greater(c, aux[j], aux[i])) a[k] = aux[j++];
             else a[k] = aux[i++];
         }
     }
