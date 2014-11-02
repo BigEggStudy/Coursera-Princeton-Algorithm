@@ -30,14 +30,14 @@ namespace BigEgg.Algorithm.Test.Sorts
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SortTestWithComparer_NullArray()
+        public void SortWithComparerTest_NullArray()
         {
             BUMergeSort.Sort(null, Point.X_ORDER);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SortTestWithComparer_NullComparer()
+        public void SortWithComparerTest_NullComparer()
         {
             Point[] points = new Point[10];
             for (int i = 0; i < 10; i++)
@@ -50,14 +50,14 @@ namespace BigEgg.Algorithm.Test.Sorts
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SortTestWithComparer_ASCOrder_NullArray()
+        public void SortWithComparerTest_ASCOrder_NullArray()
         {
             BUMergeSort.Sort(null, Point.X_ORDER, SortOrder.ASC);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SortTestWithComparer_ASCOrder_NullComparer()
+        public void SortWithComparerTest_ASCOrder_NullComparer()
         {
             Point[] points = new Point[10];
             for (int i = 0; i < 10; i++)
@@ -70,14 +70,14 @@ namespace BigEgg.Algorithm.Test.Sorts
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SortTestWithComparer_DESCOrder_NullArray()
+        public void SortWithComparerTest_DESCOrder_NullArray()
         {
             BUMergeSort.Sort(null, Point.X_ORDER, SortOrder.DESC);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SortTestWithComparer_DESCOrder_NullComparer()
+        public void SortWithComparerTest_DESCOrder_NullComparer()
         {
             Point[] points = new Point[10];
             for (int i = 0; i < 10; i++)
@@ -122,7 +122,7 @@ namespace BigEgg.Algorithm.Test.Sorts
         }
 
         [TestMethod]
-        public void SortTestWithComparer()
+        public void SortWithComparerTest()
         {
             Point[] points = new Point[10];
             for (int i = 0; i < 10; i++)
@@ -137,7 +137,7 @@ namespace BigEgg.Algorithm.Test.Sorts
         }
 
         [TestMethod]
-        public void SortTestWithComparer_ASC()
+        public void SortWithComparerTest_ASC()
         {
             Point[] points = new Point[10];
             for (int i = 0; i < 10; i++)
@@ -152,7 +152,7 @@ namespace BigEgg.Algorithm.Test.Sorts
         }
 
         [TestMethod]
-        public void SortTestWithComparer_DESC()
+        public void SortWithComparerTest_DESC()
         {
             Point[] points = new Point[10];
             for (int i = 0; i < 10; i++)
