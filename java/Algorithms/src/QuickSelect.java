@@ -22,7 +22,9 @@ public class QuickSelect {
      * @param k find the kth smallest
      */
     public static Comparable select(Comparable[] a, int k) {
+        if (a == null) throw new IllegalArgumentException();
         if (k < 0 || k >= a.length) throw new IndexOutOfBoundsException();
+
         int lo = 0, hi = a.length - 1;
         while (true) {
             int j = partition(a, lo, hi);
@@ -41,7 +43,10 @@ public class QuickSelect {
      * @param k find the kth smallest
      */
     public static Object select(Object[] a, Comparator c, int k) {
+        if (a == null) throw new IllegalArgumentException();
+        if (c == null) throw new IllegalArgumentException();
         if (k < 0 || k >= a.length) throw new IndexOutOfBoundsException();
+
         int lo = 0, hi = a.length - 1;
         while (true) {
             int j = partition(a, c, lo, hi);
@@ -57,7 +62,7 @@ public class QuickSelect {
         while (true) {
             while (less(a[++i], v))
                 if (i == hi) break;
-            while (less(v, a[++j]))
+            while (less(v, a[--j]))
                 if (j == lo) break;
             if (i >= j) break;
             exch(a, i, j);
@@ -72,7 +77,7 @@ public class QuickSelect {
         while (true) {
             while (less(c, a[++i], v))
                 if (i == hi) break;
-            while (less(c, v, a[++j]))
+            while (less(c, v, a[--j]))
                 if (j == lo) break;
             if (i >= j) break;
             exch(a, i, j);
