@@ -168,13 +168,13 @@ public class Quick3WaySortTest {
 
     @Test
     public void testSortWithComparator_DuplicateKey() throws Exception {
-        Point[] points = new Point[10];
+        Point[] points = new Point[19];
         for (int i = 0; i < 10; i++) {
             points[i] = new Point(i, 10 - i);
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 3; j <= 5; j++) {
-                points[j] = new Point(j, 10 - j);
+                points[10 + 3 * i + j - 3] = new Point(j, 10 - j);
             }
         }
         Shuffle.shuffle(points);
@@ -186,13 +186,13 @@ public class Quick3WaySortTest {
 
     @Test
     public void testSortWithComparator_ASC_DuplicateKey() throws Exception {
-        Point[] points = new Point[10];
+        Point[] points = new Point[19];
         for (int i = 0; i < 10; i++) {
             points[i] = new Point(i, 10 - i);
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 3; j <= 5; j++) {
-                points[j] = new Point(j, 10 - j);
+                points[10 + 3 * i + j - 3] = new Point(j, 10 - j);
             }
         }
         Shuffle.shuffle(points);
@@ -204,13 +204,13 @@ public class Quick3WaySortTest {
 
     @Test
     public void testSortWithComparator_DESC_DuplicateKey() throws Exception {
-        Point[] points = new Point[10];
+        Point[] points = new Point[19];
         for (int i = 0; i < 10; i++) {
             points[i] = new Point(i, 10 - i);
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 3; j <= 5; j++) {
-                points[j] = new Point(j, 10 - j);
+                points[10 + 3 * i + j - 3] = new Point(j, 10 - j);
             }
         }
         Shuffle.shuffle(points);
