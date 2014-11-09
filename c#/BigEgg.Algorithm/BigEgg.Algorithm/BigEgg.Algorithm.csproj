@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BinarySearch.cs" />
     <Compile Include="QuickSelect.cs" />
+    <Compile Include="Sorts\HeapSort.cs" />
     <Compile Include="Sorts\InsertionSort.cs" />
     <Compile Include="Sorts\BUMergeSort.cs" />
     <Compile Include="Sorts\MergeSort.cs" />
