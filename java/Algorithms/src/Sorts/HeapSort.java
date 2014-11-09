@@ -2,8 +2,6 @@ package Sorts;
 
 import java.util.Comparator;
 
-import static Sorts.SortHelper.exch;
-
 /**
  * Created by jianming.xiao on 11/9/14.
  */
@@ -162,5 +160,9 @@ public class HeapSort {
 
     private static boolean greater(Object[] pq, Comparator comparator, int i, int j) {
         return SortHelper.greater(comparator, pq[i - 1], pq[j - 1]);
+    }
+
+    private static void exch(Object[] a, int i, int j) {
+        SortHelper.exch(a, i - 1, j - 1);
     }
 }
