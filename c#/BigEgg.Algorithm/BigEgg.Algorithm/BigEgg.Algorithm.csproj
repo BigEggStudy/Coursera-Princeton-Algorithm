@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\IBag.cs" />
+    <Compile Include="Collections\IPriorityQueue.cs" />
     <Compile Include="Collections\IQueue.cs" />
     <Compile Include="Collections\IStack.cs" />
     <Compile Include="Collections\LinkedBag.cs" />
