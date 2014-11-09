@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Sorts
 {
@@ -19,7 +19,7 @@ namespace BigEgg.Algorithm.Sorts
         /// </summary>
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparer that specifying the order</param>
-        public static void Sort(Object[] a, IComparer c)
+        public static void Sort<Key>(Key[] a, IComparer<Key> c) where Key : class
         {
             Sort(a, c, SortOrder.ASC);
         }
@@ -45,7 +45,7 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparer that specifying the order</param>
         /// <param name="order">The sort order.</param>
-        public static void Sort(Object[] a, IComparer c, SortOrder order)
+        public static void Sort<Key>(Key[] a, IComparer<Key> c, SortOrder order) where Key : class
         {
             if (a == null) { throw new ArgumentNullException("a"); }
             if (c == null) { throw new ArgumentNullException("c"); }
@@ -104,18 +104,18 @@ namespace BigEgg.Algorithm.Sorts
 
 
 
-        private static void SortASC(Object[] a, IComparer c)
+        private static void SortASC<Key>(Key[] a, IComparer<Key> c) where Key : class
         {
             Shuffle.Do(a);
             SortASC(a, c, 0, a.Length - 1);
         }
 
-        private static void SortASC(Object[] a, IComparer c, int lo, int hi)
+        private static void SortASC<Key>(Key[] a, IComparer<Key> c, int lo, int hi) where Key : class
         {
             if (hi <= lo) return;
             int lt = lo, gt = hi;
             int i = lo;
-            Object v = a[lo];
+            Key v = a[lo];
             while (i <= gt)
             {
                 int cmp = c.Compare(a[i], v);
@@ -127,18 +127,18 @@ namespace BigEgg.Algorithm.Sorts
             SortASC(a, c, gt + 1, hi);
         }
 
-        private static void SortDESC(Object[] a, IComparer c)
+        private static void SortDESC<Key>(Key[] a, IComparer<Key> c) where Key : class
         {
             Shuffle.Do(a);
             SortDESC(a, c, 0, a.Length - 1);
         }
 
-        private static void SortDESC(Object[] a, IComparer c, int lo, int hi)
+        private static void SortDESC<Key>(Key[] a, IComparer<Key> c, int lo, int hi) where Key : class
         {
             if (hi <= lo) return;
             int lt = lo, gt = hi;
             int i = lo;
-            Object v = a[lo];
+            Key v = a[lo];
             while (i <= gt)
             {
                 int cmp = c.Compare(a[i], v);

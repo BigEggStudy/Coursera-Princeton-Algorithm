@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Sorts
 {
@@ -19,7 +19,7 @@ namespace BigEgg.Algorithm.Sorts
         /// </summary>
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparer that specifying the order</param>
-        public static void Sort(Object[] a, IComparer c)
+        public static void Sort<Key>(Key[] a, IComparer<Key> c) where Key : class
         {
             Sort(a, c, SortOrder.ASC);
         }
@@ -45,7 +45,7 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="a">The array to be sorted</param>
         /// <param name="c">the comparer that specifying the order</param>
         /// <param name="order">The sort order.</param>
-        public static void Sort(Object[] a, IComparer c, SortOrder order)
+        public static void Sort<Key>(Key[] a, IComparer<Key> c, SortOrder order) where Key : class
         {
             if (a == null) { throw new ArgumentNullException("a"); }
             if (c == null) { throw new ArgumentNullException("c"); }
@@ -109,16 +109,16 @@ namespace BigEgg.Algorithm.Sorts
         }
 
 
-        private static void SortASC(Object[] a, IComparer c)
+        private static void SortASC<Key>(Key[] a, IComparer<Key> c) where Key : class
         {
             int N = a.Length;
-            Object[] aux = new Object[N];
+            Key[] aux = new Key[N];
             for (int sz = 1; sz < N; sz += sz)
                 for (int lo = 0; lo < N - sz; lo += sz + sz)
                     MergeASC(a, aux, c, lo, lo + sz - 1, Math.Min(lo + sz + sz - 1, N - 1));
         }
 
-        private static void MergeASC(Object[] a, Object[] aux, IComparer c, int lo, int mid, int hi)
+        private static void MergeASC<Key>(Key[] a, Key[] aux, IComparer<Key> c, int lo, int mid, int hi) where Key : class
         {
             if (!SortHelper.Less(c, a[mid + 1], a[mid])) return;
 
@@ -135,16 +135,16 @@ namespace BigEgg.Algorithm.Sorts
             }
         }
 
-        private static void SortDESC(Object[] a, IComparer c)
+        private static void SortDESC<Key>(Key[] a, IComparer<Key> c) where Key : class
         {
             int N = a.Length;
-            Object[] aux = new Object[N];
+            Key[] aux = new Key[N];
             for (int sz = 1; sz < N; sz += sz)
                 for (int lo = 0; lo < N - sz; lo += sz + sz)
                     MergeDESC(a, aux, c, lo, lo + sz - 1, Math.Min(lo + sz + sz - 1, N - 1));
         }
 
-        private static void MergeDESC(Object[] a, Object[] aux, IComparer c, int lo, int mid, int hi)
+        private static void MergeDESC<Key>(Key[] a, Key[] aux, IComparer<Key> c, int lo, int mid, int hi) where Key : class
         {
             if (!SortHelper.Greater(c, a[mid + 1], a[mid])) return;
 
