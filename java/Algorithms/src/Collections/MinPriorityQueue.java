@@ -56,9 +56,9 @@ public class MinPriorityQueue<Key> extends PriorityQueue<Key> {
 
 
     /**
-     * Returns a smallest key on the priority queue.
+     * Returns the smallest key on the priority queue.
      *
-     * @return a smallest key on the priority queue
+     * @return the smallest key on the priority queue
      * @throws java.util.NoSuchElementException if priority queue is empty
      */
     public Key min() {
@@ -66,9 +66,9 @@ public class MinPriorityQueue<Key> extends PriorityQueue<Key> {
     }
 
     /**
-     * Removes and returns a smallest key on the priority queue.
+     * Removes and returns the smallest key on the priority queue.
      *
-     * @return a smallest key on the priority queue
+     * @return the smallest key on the priority queue
      * @throws java.util.NoSuchElementException if the priority queue is empty
      */
     public Key delMin() {

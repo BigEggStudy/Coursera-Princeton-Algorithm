@@ -42,7 +42,7 @@ public class PriorityQueueTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void testFirst_NullItem() throws Exception {
+    public void testFirst_Empty() throws Exception {
         MockPriorityQueue pq = new MockPriorityQueue();
         pq.first();
     }
@@ -60,7 +60,7 @@ public class PriorityQueueTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void testDelete_NullItem() throws Exception {
+    public void testDelete_Empty() throws Exception {
         MockPriorityQueue pq = new MockPriorityQueue();
         pq.delete();
     }
