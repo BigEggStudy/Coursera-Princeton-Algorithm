@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Test.Sorts
 {
     public class Point : IComparable<Point>
     {
-        public static IComparer X_ORDER = new XOrder();
-        public static IComparer Y_ORDER = new YOrder();
+        public static IComparer<Point> X_ORDER = new XOrder();
+        public static IComparer<Point> Y_ORDER = new YOrder();
 
         public Point(int x, int y)
         {
@@ -27,7 +26,7 @@ namespace BigEgg.Algorithm.Test.Sorts
             return 0;
         }
 
-        private class XOrder : IComparer, IComparer<Point>
+        private class XOrder : IComparer<Point>
         {
             public int Compare(Point x, Point y)
             {
@@ -35,25 +34,15 @@ namespace BigEgg.Algorithm.Test.Sorts
                 if (x.X > y.X) return +1;
                 return 0;
             }
-
-            public int Compare(object x, object y)
-            {
-                return Compare(x as Point, y as Point);
-            }
         }
 
-        private class YOrder : IComparer, IComparer<Point>
+        private class YOrder : IComparer<Point>
         {
             public int Compare(Point x, Point y)
             {
                 if (x.Y < y.Y) return -1;
                 if (x.Y > y.Y) return +1;
                 return 0;
-            }
-
-            public int Compare(object x, object y)
-            {
-                return Compare(x as Point, y as Point);
             }
         }
     }

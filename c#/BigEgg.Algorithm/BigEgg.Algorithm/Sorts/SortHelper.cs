@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace BigEgg.Algorithm.Sorts
 {
@@ -18,7 +18,7 @@ namespace BigEgg.Algorithm.Sorts
         /// Is v < w ?
         /// </summary>
         /// <returns><c>True</c> if v < w, otherwise <c>false</c>.</returns>
-        public static bool Less(IComparer c, Object v, Object w)
+        public static bool Less<Key>(IComparer<Key> c, Key v, Key w) where Key : class
         {
             return c.Compare(v, w) < 0;
         }
@@ -36,7 +36,7 @@ namespace BigEgg.Algorithm.Sorts
         /// Is v > w ?
         /// </summary>
         /// <returns><c>True</c> if v > w, otherwise <c>false</c>.</returns>
-        public static bool Greater(IComparer c, Object v, Object w)
+        public static bool Greater<Key>(IComparer<Key> c, Key v, Key w) where Key : class
         {
             return c.Compare(v, w) > 0;
         }
@@ -104,7 +104,7 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="a">The array</param>
         /// <param name="c">The comparer.</param>        
         /// <returns><c>True</c> if array is sorted, otherwise <c>false</c>.</returns>
-        public static bool IsSorted(Object[] a, IComparer c)
+        public static bool IsSorted<Key>(Key[] a, IComparer<Key> c) where Key : class
         {
             return IsSorted(a, c, SortOrder.ASC);
         }
@@ -116,7 +116,7 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="c">The comparer.</param>
         /// <param name="order">The sort order</param>
         /// <returns><c>True</c> if array is sorted, otherwise <c>false</c>.</returns>
-        public static bool IsSorted(Object[] a, IComparer c, SortOrder order)
+        public static bool IsSorted<Key>(Key[] a, IComparer<Key> c, SortOrder order) where Key : class
         {
             return IsSorted(a, c, 0, a.Length, order);
         }
@@ -130,7 +130,7 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="hi">The high index</param>
         /// <param name="order">The sort order</param>
         /// <returns><c>True</c> if array is sorted, otherwise <c>false</c>.</returns>
-        public static bool IsSorted(Object[] a, IComparer c, int lo, int hi, SortOrder order)
+        public static bool IsSorted<Key>(Key[] a, IComparer<Key> c, int lo, int hi, SortOrder order) where Key : class
         {
             if (order == SortOrder.ASC)
             {
