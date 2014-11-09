@@ -55,9 +55,9 @@ public class MaxPriorityQueue<Key> extends PriorityQueue<Key> {
     }
 
     /**
-     * Returns a largest key on the priority queue.
+     * Returns the largest key on the priority queue.
      *
-     * @return a largest key on the priority queue
+     * @return the largest key on the priority queue
      * @throws java.util.NoSuchElementException if the priority queue is empty
      */
     public Key max() {
@@ -65,9 +65,9 @@ public class MaxPriorityQueue<Key> extends PriorityQueue<Key> {
     }
 
     /**
-     * Removes and returns a largest key on the priority queue.
+     * Removes and returns the largest key on the priority queue.
      *
-     * @return a largest key on the priority queue
+     * @return the largest key on the priority queue
      * @throws java.util.NoSuchElementException if priority queue is empty.
      */
     public Key delMax() {
