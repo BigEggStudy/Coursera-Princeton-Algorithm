@@ -47,9 +47,9 @@ namespace BigEgg.Algorithm.Sorts
         /// <param name="a">The array</param>
         /// <param name="i">The index1.</param>
         /// <param name="j">The index2.</param>
-        public static void Exchange(Object[] a, int i, int j)
+        public static void Exchange<Key>(Key[] a, int i, int j)
         {
-            Object swap = a[i];
+            Key swap = a[i];
             a[i] = a[j];
             a[j] = swap;
         }
