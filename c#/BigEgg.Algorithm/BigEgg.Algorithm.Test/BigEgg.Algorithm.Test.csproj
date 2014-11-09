@@ -54,6 +54,7 @@
     <Compile Include="Collections\LinkedBagTest.cs" />
     <Compile Include="Collections\LinkedQueueTest.cs" />
     <Compile Include="Collections\LinkedStackTest.cs" />
+    <Compile Include="Collections\MaxPriorityQueueTest.cs" />
     <Compile Include="Collections\MinPriorityQueueTest.cs" />
     <Compile Include="Collections\PriorityQueueTest.cs" />
     <Compile Include="Collections\ResizingArrayBag.cs" />
