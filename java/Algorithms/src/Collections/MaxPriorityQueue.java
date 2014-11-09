@@ -60,7 +60,7 @@ public class MaxPriorityQueue<Key> extends PriorityQueue<Key> {
      * @return a largest key on the priority queue
      * @throws java.util.NoSuchElementException if the priority queue is empty
      */
-    public Key Max() {
+    public Key max() {
         return first();
     }
 
@@ -89,7 +89,7 @@ public class MaxPriorityQueue<Key> extends PriorityQueue<Key> {
 
     @Override
     protected void sink(int k) {
-        while (2 * k >= N) {
+        while (2 * k <= N) {
             int j = 2 * k;
             if (j < N && less(j, j + 1)) j++;
             if (!less(k, j)) break;
