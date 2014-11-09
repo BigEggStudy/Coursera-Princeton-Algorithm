@@ -5,9 +5,9 @@ namespace BigEgg.Algorithm.Collections
 {
     public abstract class PriorityQueue<Key> : IPriorityQueue<Key>
     {
-        private Key[] pq;
-        private int N;
-        private IComparer<Key> comparer;
+        protected Key[] pq;
+        protected int N;
+        protected IComparer<Key> comparer;
 
         /// <summary>
         /// Initializes an empty priority queue.

@@ -33,6 +33,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\MaxPriorityQueue.cs" />
+    <Compile Include="Collections\MinPriorityQueue.cs" />
     <Compile Include="Collections\IBag.cs" />
     <Compile Include="Collections\IPriorityQueue.cs" />
     <Compile Include="Collections\IQueue.cs" />
