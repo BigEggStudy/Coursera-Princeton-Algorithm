@@ -17,7 +17,7 @@ namespace BigEgg.Algorithm.Sorts
         /// and uniformly distributed numbers between 0 and 1).
         /// </summary>
         /// <param name="a">the array to be shuffled</param>
-        public static void Do(Object[] a)
+        public static void Do<Key>(Key[] a)
         {
             int N = a.Length;
             for (int i = 0; i < N; i++)

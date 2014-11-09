@@ -54,11 +54,15 @@
     <Compile Include="Collections\LinkedBagTest.cs" />
     <Compile Include="Collections\LinkedQueueTest.cs" />
     <Compile Include="Collections\LinkedStackTest.cs" />
+    <Compile Include="Collections\MaxPriorityQueueTest.cs" />
+    <Compile Include="Collections\MinPriorityQueueTest.cs" />
+    <Compile Include="Collections\PriorityQueueTest.cs" />
     <Compile Include="Collections\ResizingArrayBag.cs" />
     <Compile Include="Collections\ResizingArrayQueueTest.cs" />
     <Compile Include="Collections\ResizingArrayStackTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickSelectTest.cs" />
+    <Compile Include="Sorts\HeapSortTest.cs" />
     <Compile Include="Sorts\Quick3WaySortTest.cs" />
     <Compile Include="Sorts\QuickSortTest.cs" />
     <Compile Include="Sorts\MergeSortTest.cs" />
