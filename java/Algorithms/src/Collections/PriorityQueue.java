@@ -99,8 +99,11 @@ public abstract class PriorityQueue<Key> implements IPriorityQueue<Key> {
      * Adds a new key to the priority queue.
      *
      * @param x the new key to add to the priority queue
+     * @throws java.lang.NullPointerException if the <tt>x</tt> is null
      */
     public void insert(Key x) {
+        if (x == null) throw new NullPointerException();
+
         if (N >= pq.length - 1) resize(pq.length * 2);
         pq[++N] = x;
         swim(N);
@@ -117,7 +120,7 @@ public abstract class PriorityQueue<Key> implements IPriorityQueue<Key> {
         Key result = pq[1];
         exch(1, N--);
         sink(1);
-        pq[N - 1] = null;
+        pq[N + 1] = null;
         if (N > 0 && N == (pq.length - 1) / 4) resize(pq.length / 2);
         return result;
     }
