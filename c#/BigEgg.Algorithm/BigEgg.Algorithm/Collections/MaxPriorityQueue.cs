@@ -98,7 +98,7 @@ namespace BigEgg.Algorithm.Collections
                 int j = 2 * k;
                 if (j < N && Less(j, j + 1)) j++;
                 if (!Less(k, j)) break;
-                Exch(k, j);
+                Exchange(k, j);
                 k = j;
             }
         }
@@ -107,7 +107,7 @@ namespace BigEgg.Algorithm.Collections
         {
             while (k > 1 && Less(k / 2, k))
             {
-                Exch(k / 2, k);
+                Exchange(k / 2, k);
                 k = k / 2;
             }
         }

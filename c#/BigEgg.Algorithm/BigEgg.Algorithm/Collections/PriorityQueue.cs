@@ -126,7 +126,7 @@ namespace BigEgg.Algorithm.Collections
             if (IsEmpty()) { throw new ArgumentOutOfRangeException(); }
 
             var result = pq[1];
-            Exch(1, N--);
+            Exchange(1, N--);
             Sink(1);
             pq[N + 1] = default(Key);
             if (N > 0 && N == (pq.Length - 1) / 4)
@@ -160,7 +160,7 @@ namespace BigEgg.Algorithm.Collections
 
         protected abstract void Swim(int k);
 
-        protected void Exch(int i, int j)
+        protected void Exchange(int i, int j)
         {
             var temp = pq[i];
             pq[i] = pq[j];
