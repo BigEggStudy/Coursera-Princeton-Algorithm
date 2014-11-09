@@ -85,9 +85,9 @@ public abstract class PriorityQueue<Key> implements IPriorityQueue<Key> {
     }
 
     /**
-     * Returns a first key on the priority queue.
+     * Returns the first key on the priority queue.
      *
-     * @return a first key on the priority queue
+     * @return the first key on the priority queue
      * @throws java.util.NoSuchElementException if the priority queue is empty
      */
     public Key first() {

@@ -19,9 +19,9 @@ public interface IPriorityQueue<Key> extends Iterable<Key> {
     int size();
 
     /**
-     * Returns a first key on the priority queue.
+     * Returns the first key on the priority queue.
      *
-     * @return a first key on the priority queue
+     * @return the first key on the priority queue
      * @throws java.util.NoSuchElementException if the priority queue is empty
      */
     Key first();
