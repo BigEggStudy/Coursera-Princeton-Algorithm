@@ -1,6 +1,6 @@
 ﻿using BigEgg.Algorithm.Sorts;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace BigEgg.Algorithm
 {
@@ -38,7 +38,7 @@ namespace BigEgg.Algorithm
         /// <param name="c">The comparer</param>
         /// <param name="k">Find the kth smallest</param>
         /// <returns>The kth smallest key</returns>
-        public static Object Select(Object[] a, IComparer c, int k)
+        public static Key Select<Key>(Key[] a, IComparer<Key> c, int k) where Key : class
         {
             if (a == null) { throw new ArgumentNullException(); }
             if (c == null) { throw new ArgumentNullException(); }
@@ -71,10 +71,10 @@ namespace BigEgg.Algorithm
             return j;
         }
 
-        private static int Partition(Object[] a, IComparer c, int lo, int hi)
+        private static int Partition<Key>(Key[] a, IComparer<Key> c, int lo, int hi) where Key : class
         {
             int i = lo, j = hi + 1;
-            Object v = a[lo];
+            Key v = a[lo];
             while (true)
             {
                 while (SortHelper.Less(c, a[++i], v))
