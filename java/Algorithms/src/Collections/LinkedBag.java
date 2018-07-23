@@ -25,7 +25,6 @@ public class LinkedBag<Item> implements IBag<Item> {
      *
      * @return true if this bag is empty; false otherwise
      */
-    @Override
     public boolean isEmpty() {
         return first == null;
     }
@@ -35,7 +34,6 @@ public class LinkedBag<Item> implements IBag<Item> {
      *
      * @return the number of items in this bag
      */
-    @Override
     public int size() {
         return N;
     }
@@ -46,7 +44,6 @@ public class LinkedBag<Item> implements IBag<Item> {
      * @param item the item to add to this bag
      * @throws NullPointerException if the <tt>item</tt> is null;
      */
-    @Override
     public void add(Item item) {
         if (item == null) throw new NullPointerException();
         Node oldFisrt = first;
@@ -75,7 +72,6 @@ public class LinkedBag<Item> implements IBag<Item> {
      *
      * @return an iterator that iterates over the items in this bag
      */
-    @Override
     public Iterator<Item> iterator() {
         return new LinkedBagIterator();
     }
@@ -83,12 +79,10 @@ public class LinkedBag<Item> implements IBag<Item> {
     private class LinkedBagIterator implements Iterator<Item> {
         private Node current = first;
 
-        @Override
         public boolean hasNext() {
             return current != null;
         }
 
-        @Override
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
             Item result = current.item;
@@ -96,7 +90,6 @@ public class LinkedBag<Item> implements IBag<Item> {
             return result;
         }
 
-        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }

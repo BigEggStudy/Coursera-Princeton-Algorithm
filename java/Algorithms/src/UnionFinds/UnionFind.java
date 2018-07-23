@@ -28,7 +28,6 @@ public abstract class UnionFind implements IUnionFind {
      *
      * @return the number of components (between 1 and N)
      */
-    @Override
     public int count() {
         return count;
     }
