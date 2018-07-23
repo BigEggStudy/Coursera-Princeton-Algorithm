@@ -28,17 +28,14 @@ public class UnionFindTest {
             super(N);
         }
 
-        @Override
         public void union(int p, int q) throws IndexOutOfBoundsException {
             throw new NotImplementedException();
         }
 
-        @Override
         public boolean connected(int p, int q) throws IndexOutOfBoundsException {
             throw new NotImplementedException();
         }
 
-        @Override
         public int find(int p) throws IndexOutOfBoundsException {
             throw new NotImplementedException();
         }
