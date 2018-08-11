@@ -4,15 +4,17 @@ public class Percolation {
     private final int virtualTopSiteIndex;
     private final int virtualBottomSiteIndex;
     private final int N;
+    private final WeightedQuickUnionUF weightedQuickUnionUF;
+    private final WeightedQuickUnionUF backwashUF;
     private boolean[] sites;
-    private WeightedQuickUnionUF weightedQuickUnionUF;
-    private WeightedQuickUnionUF backwashUF;
+    private int openSitesCount = 0;
 
     // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
         if (N <= 0) throw new IllegalArgumentException();
 
         this.N = N;
+        this.openSitesCount = 0;
         this.virtualTopSiteIndex = N * N;
         this.virtualBottomSiteIndex = N * N + 1;
         sites = new boolean[N * N];
@@ -28,7 +30,12 @@ public class Percolation {
         validation(i, j);
 
         int index = xyTo1D(i, j);
+        if (sites[index]) {
+            return;
+        }
+
         sites[index] = true;
+        openSitesCount++;
         if (i > 1) {
             int upIndex = xyTo1D(i - 1, j);
             if (sites[upIndex]) {
@@ -82,6 +89,11 @@ public class Percolation {
         return backwashUF.connected(index, virtualTopSiteIndex);
     }
 
+    // number of open sites
+    public int numberOfOpenSites() {
+        return openSitesCount;
+    }
+
     // does the system percolate?
     public boolean percolates() {
         if (N == 1) {
@@ -92,8 +104,8 @@ public class Percolation {
     }
 
     private void validation(int i, int j) {
-        if (i <= 0 || i > N) throw new IndexOutOfBoundsException();
-        if (j <= 0 || j > N) throw new IndexOutOfBoundsException();
+        if (i <= 0 || i > N) throw new IllegalArgumentException();
+        if (j <= 0 || j > N) throw new IllegalArgumentException();
     }
 
     private int xyTo1D(int i, int j) {

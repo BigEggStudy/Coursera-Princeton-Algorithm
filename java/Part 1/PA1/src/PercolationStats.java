@@ -3,54 +3,54 @@ import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.StdOut;
 
 public class PercolationStats {
-    private double[] openSiteCounts;
-    private int T;
+    private final double _mean;
+    private final double _stddev;
+    private final double _confidenceLo;
+    private final double _confidenceHi;
 
-    // perform T independent computational experiments on an N-by-N grid
-    public PercolationStats(int N, int T) {
-        if (N <= 0) throw new IllegalArgumentException();
-        if (T <= 0) throw new IllegalArgumentException();
+    // perform trials independent experiments on an n-by-n grid
+    public PercolationStats(int n, int trials) {
+        if (n <= 0) throw new IllegalArgumentException();
+        if (trials <= 0) throw new IllegalArgumentException();
 
-        this.T = T;
-        openSiteCounts = new double[T];
-        for (int i = 0; i < T; i++) {
-            Percolation percolation = new Percolation(N);
-            int count = 0;
+        double[] openSiteCounts = new double[trials];
+        for (int i = 0; i < trials; i++) {
+            Percolation percolation = new Percolation(n);
             while (!percolation.percolates()) {
-                int x = StdRandom.uniform(1, N + 1);
-                int y = StdRandom.uniform(1, N + 1);
+                int x = StdRandom.uniform(1, n + 1);
+                int y = StdRandom.uniform(1, n + 1);
 
                 if (!percolation.isOpen(x, y)) {
                     percolation.open(x, y);
-                    count++;
                 }
             }
-            openSiteCounts[i] = 1.0 * count / (N * N);
+            openSiteCounts[i] = 1.0 * percolation.numberOfOpenSites() / (n * n);
         }
+
+        this._mean = StdStats.mean(openSiteCounts);
+        this._stddev = StdStats.stddev(openSiteCounts);
+        this._confidenceLo = this._mean - (1.96 * this._stddev) / Math.sqrt(trials);
+        this._confidenceHi = this._mean + (1.96 * this._stddev) / Math.sqrt(trials);
     }
 
     // sample mean of percolation threshold
     public double mean() {
-        return StdStats.mean(openSiteCounts);
+        return this._mean;
     }
 
     // sample standard deviation of percolation threshold
     public double stddev() {
-        if (T == 1) {
-            return Double.NaN;
-        } else {
-            return StdStats.stddev(openSiteCounts);
-        }
+        return this._stddev;
     }
 
     // returns lower bound of the 95% confidence interval
     public double confidenceLo() {
-        return mean() - 1.96 * stddev() / Math.sqrt(T);
+        return this._confidenceLo;
     }
 
     // returns upper bound of the 95% confidence interval
     public double confidenceHi() {
-        return mean() + 1.96 * stddev() / Math.sqrt(T);
+        return this._confidenceHi;
     }
 
     // test client, described below
