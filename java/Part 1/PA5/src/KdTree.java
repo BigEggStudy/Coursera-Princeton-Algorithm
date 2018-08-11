@@ -1,3 +1,7 @@
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.RectHV;
+
 /**
  * Created by jianming.xiao on 10/19/14.
  */

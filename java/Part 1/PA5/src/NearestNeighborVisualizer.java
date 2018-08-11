@@ -11,6 +11,8 @@
  *
  *************************************************************************/
 
+import edu.princeton.cs.algs4.Point2D;
+
 public class NearestNeighborVisualizer {
 
     public static void main(String[] args) {

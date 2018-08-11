@@ -1,3 +1,6 @@
+import edu.princeton.cs.algs4.MinPQ;
+import edu.princeton.cs.algs4.Stack;
+
 /**
  * Created by jianming.xiao on 10/12/14.
  */

@@ -1,6 +1,5 @@
-/**
- * Created by jianming.xiao on 10/4/14.
- */
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
 public class Percolation {
     private final int virtualTopSiteIndex;
     private final int virtualBottomSiteIndex;
