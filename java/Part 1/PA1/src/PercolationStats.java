@@ -1,6 +1,7 @@
-/**
- * Created by jianming.xiao on 10/6/14.
- */
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.StdOut;
+
 public class PercolationStats {
     private double[] openSiteCounts;
     private int T;
