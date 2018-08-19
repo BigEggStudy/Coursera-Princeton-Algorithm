@@ -1,13 +1,12 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Created by jianming.xiao on 9/26/14.
- */
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdOut;
+
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] items;
     private int first, end, size;
-
 
     // construct an empty randomized queue
     public RandomizedQueue() {
@@ -47,7 +46,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // add the item
     public void enqueue(Item item) {
-        if (item == null) throw new NullPointerException("item cannot be null.");
+        if (item == null) throw new IllegalArgumentException();
         if (size() == items.length) {
             resize(2 * items.length);
         }
@@ -72,7 +71,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // delete and return a random item
     public Item dequeue() {
-        if (isEmpty()) throw new NoSuchElementException("The queue is empty.");
+        if (isEmpty()) throw new NoSuchElementException();
 
         first = fixedSize(first);
         Item result = items[first];
@@ -87,7 +86,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return (but do not delete) a random item
     public Item sample() {
-        if (isEmpty()) throw new NoSuchElementException("The queue is empty.");
+        if (isEmpty()) throw new NoSuchElementException ();
 
         int randomIndex = StdRandom.uniform(size);
         int index = fixedSize(randomIndex + first);
@@ -133,7 +132,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("Not support the remove operation in iterator");
+            throw new UnsupportedOperationException();
         }
     }
 

@@ -1,7 +1,10 @@
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 /**
  * Created by jianming.xiao on 9/28/14.
  */
-public class Subset {
+public class Permutation {
     public static void main(String[] args) {
         String outputCountString = args[0];
         int outputCount = Integer.parseInt(outputCountString);

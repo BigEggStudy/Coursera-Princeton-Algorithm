@@ -1,9 +1,6 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Created by jianming.xiao on 9/23/14.
- */
 public class Deque<Item> implements Iterable<Item> {
     private int nodeCount;
     private Node firstNode;
@@ -35,7 +32,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // insert the item at the front
     public void addFirst(Item item) {
-        if (item == null) throw new NullPointerException("item cannot be null.");
+        if (item == null) throw new IllegalArgumentException();
 
         Node oldFirst = firstNode;
         firstNode = new Node();
@@ -52,7 +49,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // insert the item at the end
     public void addLast(Item item) {
-        if (item == null) throw new NullPointerException("item cannot be null.");
+        if (item == null) throw new IllegalArgumentException();
 
         Node oldLast = lastNode;
         lastNode = new Node();
@@ -69,7 +66,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // delete and return the item at the front
     public Item removeFirst() {
-        if (isEmpty()) throw new NoSuchElementException("The deque is empty.");
+        if (isEmpty()) throw new NoSuchElementException();
 
         Node oldFirst = firstNode;
         Item result = oldFirst.item;
@@ -86,7 +83,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // delete and return the item at the end
     public Item removeLast() {
-        if (isEmpty()) throw new NoSuchElementException("The deque is empty.");
+        if (isEmpty()) throw new NoSuchElementException();
 
         Node oldLast = lastNode;
         Item result = oldLast.item;
@@ -125,7 +122,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("Not support the remove operation in iterator.");
+            throw new UnsupportedOperationException();
         }
     }
 
