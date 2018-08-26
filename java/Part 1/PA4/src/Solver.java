@@ -1,50 +1,63 @@
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
 
 /**
  * Created by jianming.xiao on 10/12/14.
  */
 public class Solver {
-    private MinPQ<SearchNode> pq;
-    private MinPQ<SearchNode> twinPQ;
     private SearchNode goalNode;
-    private Board initialBoard;
 
     private class SearchNode implements Comparable<SearchNode> {
-        private Board board;
-        private int moves;
-        private SearchNode previousNode;
+        private final Board board;
+        private final int manhattan;
+        private final int hamming;
+        private final int moves;
+        private final SearchNode previousNode;
 
-        private int priority() {
-            return this.board.manhattan() + this.moves;
+        public SearchNode(Board board, int moves) {
+            this.board = board;
+            this.manhattan = board.manhattan();
+            this.hamming = board.hamming();
+            this.moves = moves;
+            this.previousNode = null;
+        }
+
+        public SearchNode(Board board, int moves, SearchNode previousNode) {
+            this.board = board;
+            this.manhattan = board.manhattan();
+            this.hamming = board.hamming();
+            this.moves = moves;
+            this.previousNode = previousNode;
         }
 
         @Override
         public int compareTo(SearchNode that) {
-            if ((this.priority()) > (that.priority())) return 1;
-            if ((this.priority()) < (that.priority())) return -1;
-            if ((this.board.manhattan()) > (that.board.manhattan())) return 1;
-            if ((this.board.manhattan()) < (that.board.manhattan())) return -1;
-            if ((this.board.hamming()) > (that.board.hamming())) return 1;
-            if ((this.board.hamming()) < (that.board.hamming())) return -1;
+            if ((this.manhattan + this.moves) > (that.manhattan + that.moves)) return 1;
+            if ((this.manhattan + this.moves) < (that.manhattan + that.moves)) return -1;
+            if (this.manhattan > that.manhattan) return 1;
+            if (this.manhattan < that.manhattan) return -1;
+            if (this.hamming > that.hamming) return 1;
+            if (this.hamming < that.hamming) return -1;
             return 0;
         }
     }
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
-        pq = new MinPQ<SearchNode>();
-        twinPQ = new MinPQ<SearchNode>();
-        initialBoard = initial;
+        if (initial == null) {
+            throw new IllegalArgumentException();
+        }
 
-        SearchNode initialNode = new SearchNode();
-        initialNode.board = initial;
-        initialNode.moves = 0;
+        MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
+        MinPQ<SearchNode> twinPQ = new MinPQ<SearchNode>();
+        Board initialBoard = initial;
+
+        SearchNode initialNode = new SearchNode(initial, 0);
         pq.insert(initialNode);
 
-        SearchNode twinInitial = new SearchNode();
-        twinInitial.board = initialBoard.twin();
-        twinInitial.moves = 0;
+        SearchNode twinInitial = new SearchNode(initialBoard.twin(), 0);
         twinPQ.insert(twinInitial);
 
         while (true) {
@@ -69,10 +82,7 @@ public class Solver {
             if (node.previousNode != null && neighbor.equals(node.previousNode.board)) {
                 continue;
             }
-            SearchNode newNode = new SearchNode();
-            newNode.board = neighbor;
-            newNode.moves = node.moves + 1;
-            newNode.previousNode = node;
+            SearchNode newNode = new SearchNode(neighbor, node.moves + 1, node);
             pq.insert(newNode);
         }
         return null;
