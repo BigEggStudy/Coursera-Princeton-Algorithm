@@ -1,10 +1,8 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.RectHV;
+import edu.princeton.cs.algs4.StdDraw;
 
-/**
- * Created by jianming.xiao on 10/19/14.
- */
 public class KdTree {
     private Node root;
     private int N;
@@ -34,6 +32,9 @@ public class KdTree {
     }
 
     public void insert(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException();
+        }
         root = insert(root, p, true);
     }
 
@@ -77,6 +78,9 @@ public class KdTree {
     }
 
     public boolean contains(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException();
+        }
         return get(root, p, true) != null;
     }
 
@@ -114,6 +118,9 @@ public class KdTree {
     }
 
     public Iterable<Point2D> range(RectHV rect) {
+        if (rect == null) {
+            throw new IllegalArgumentException();
+        }
         Stack<Point2D> result = new Stack<Point2D>();
         range(result, root, rect, true);
         return result;
@@ -136,6 +143,9 @@ public class KdTree {
     }
 
     public Point2D nearest(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException();
+        }
         if (isEmpty()) return null;
 
         Nearest nearest = new Nearest(null, Double.POSITIVE_INFINITY);

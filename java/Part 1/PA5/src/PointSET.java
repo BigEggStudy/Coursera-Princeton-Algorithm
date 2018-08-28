@@ -1,10 +1,8 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.RectHV;
+import edu.princeton.cs.algs4.StdDraw;
 
-/**
- * Created by jianming.xiao on 10/16/14.
- */
 public class PointSET {
     private SET<Point2D> points;
 
@@ -25,12 +23,18 @@ public class PointSET {
 
     // add the point to the set (if it is not already in the set)
     public void insert(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException();
+        }
         if (!points.contains(p))
             points.add(p);
     }
 
     // does the set contain point p?
     public boolean contains(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException();
+        }
         return points.contains(p);
     }
 
@@ -46,6 +50,9 @@ public class PointSET {
 
     // all points that are inside the rectangle
     public Iterable<Point2D> range(RectHV rect) {
+        if (rect == null) {
+            throw new IllegalArgumentException();
+        }
         SET<Point2D> result = new SET<Point2D>();
         for (Point2D point : points) {
             if (rect.contains(point))
@@ -56,6 +63,9 @@ public class PointSET {
 
     // a nearest neighbor in the set to point p; null if the set is empty
     public Point2D nearest(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException();
+        }
         if (isEmpty()) return null;
 
         Point2D nearestPoint = null;
